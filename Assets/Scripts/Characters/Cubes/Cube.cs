@@ -5,7 +5,16 @@ public class Cube : Entity, IClickable{
 	
     private bool isSelected = false;
     private static Cube selectedCube;
+	public Command command;
 
+	public Command Command {
+		get {
+			return this.command;
+		}
+		set {
+			command = value;
+		}
+	}
     public bool IsSelected
     {
         get { return isSelected; }
@@ -18,10 +27,24 @@ public class Cube : Entity, IClickable{
 
     public virtual void MoveTo(Vector3 nextPosition) {
         Level.Singleton.Entities.Remove(transform.position);
-        transform.position = nextPosition;
-        Level.Singleton.Entities.Add(transform.position, this);
+		AnimationHelper.AnimateJump2(gameObject,Vector3.down,nextPosition,0f,"EndExecution",null);
+        Level.Singleton.Entities.Add(nextPosition, this);
     }
-
+	
+	public void EndExecution(){
+		OrganizeTransform();
+		command.EndExecution();
+	}
+	
+	private Vector3 Vector3Round(Vector3 v){
+		return new Vector3(Mathf.Round(v.x),Mathf.Round(v.y),Mathf.Round(v.z));
+	}
+	
+	public void OrganizeTransform(){
+		transform.position = Vector3Round(transform.position);
+		transform.rotation = Quaternion.Euler(Vector3Round(transform.rotation.eulerAngles));
+	}
+	
     public virtual Command[] Options{ 
         get {
             List<Command> options = new List<Command>();

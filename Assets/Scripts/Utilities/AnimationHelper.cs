@@ -31,8 +31,8 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
    }
 	
 	#region Animate Jumps
-	public static void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
-		AnimateJump(objective,down,finalPosition,delay,null,null);
+	public static float AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
+		return AnimateJump(objective,down,finalPosition,delay,null,null);
 	}
 	
 	/// <summary>
@@ -56,7 +56,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
     /// Delay of the animation
     /// </param>
     ///
-    public static void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod, object parameters){
+    public static float AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod, object parameters){
         
 		Vector3 vertical = Vector3.zero;
 		Vector3 finalVertical = Vector3.zero;
@@ -103,10 +103,12 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		}
         iTween.MoveAdd(objective,hs);
         delay += 0.5f;
+		
+		return delay;
     }
 	
-	public static void AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
-		AnimateJump2(objective,down,finalPosition,delay,null,null);
+	public static float AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
+		return AnimateJump2(objective,down,finalPosition,delay,null,null);
 	}
 	
 	/// <summary>
@@ -128,7 +130,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	/// On complete method. If you want to continue or add logic after an animation
 	/// place the name of the method on this parameter, if you dont just leave it null or blank.
 	/// </param>
-	public static void AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod, object parameters){
+	public static float AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod, object parameters){
 		Vector3 finalMovement = finalPosition - objective.transform.position;
         Vector3 directionAxis = -down;// movement is countrary to down
         Vector3 upMovement = Vector3.Dot(directionAxis, finalMovement) * directionAxis;// MoveDirection*Quantity + offset
@@ -172,6 +174,8 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 			}
 			iTween.MoveAdd(objective,hs);
 		}
+		
+		return delay;
 	}
 	
 	#endregion
