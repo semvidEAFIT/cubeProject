@@ -32,7 +32,9 @@ public abstract class CubeController : MonoBehaviour
     {
         if (currentCommand == null && commandQueue.Count > 0 && cube.IsSelected)
         {
-            ExecuteCommand(commandQueue.Dequeue());
+			Command c = commandQueue.Dequeue();
+			cube.Command = c;
+            ExecuteCommand(c);
         }
     }
 
