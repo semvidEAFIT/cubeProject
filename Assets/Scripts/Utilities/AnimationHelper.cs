@@ -18,10 +18,6 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		//float delay = AnimateShrink(gameObject, 0f);
 		//AnimateGrow(gameObject, delay);
 		
-		ParticleEmitter emitter = (ParticleEmitter)gameObject.AddComponent("EllipsoidParticleEmitter");
-		emitter.emit = true;
-
-		
 		AnimateBounce(gameObject, 
 			new Vector3(0,-1,0),
 			gameObject.transform.position + new Vector3(1,-1,0),
