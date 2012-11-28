@@ -11,6 +11,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	public static GameObject bounceObject;
 	public static Vector3 down, middlePosition, finalPosition;
 	public static float delay;
+	public static string onCompleteMethod;
 	
 	void Start(){
 		
@@ -18,11 +19,13 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		//float delay = AnimateShrink(gameObject, 0f);
 		//AnimateGrow(gameObject, delay);
 		
-		/*AnimateBounce(gameObject, 
+		
+		
+		AnimateBounce(gameObject, 
 			new Vector3(0,-1,0),
 			gameObject.transform.position + new Vector3(1,-1,0),
 			gameObject.transform.position + new Vector3(1,2,0) + new Vector3(1,-1,0), 
-			0.0f);*/
+			0.0f);
 	}
 	
 	private static Hashtable getBasicHs(Vector3 amount,float time, float delay, iTween.EaseType easeType){
@@ -37,20 +40,27 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	
 	#region Animate Bounce
 	
-	public static void AnimateBounce(GameObject gameObject, Vector3 down, Vector3 middlePosition, Vector3 finalPosition, float delay){
+	public static void AnimateBounce(GameObject gameObject, Vector3 down, Vector3 middlePosition, 
+		Vector3 finalPosition, float delay){
+		
+		AnimateBounce(gameObject, down, middlePosition, finalPosition, delay, null, null);
+	}
+	
+	public static void AnimateBounce(GameObject gameObject, Vector3 down, Vector3 middlePosition, 
+		Vector3 finalPosition, float delay, string onCompleteMethod, object parameters ){
 		
 		AnimationHelper.finalPosition = finalPosition;
 		AnimationHelper.delay = delay;
 		AnimationHelper.down = down;
 		AnimationHelper.bounceObject = gameObject;
+		AnimationHelper.onCompleteMethod = onCompleteMethod;
 		
-		
-		AnimateJump(bounceObject, down, middlePosition, delay, "AnimateBounceFinal", null);
+		AnimateJump(bounceObject, down, middlePosition, delay, "AnimateBounceFinal", parameters);
 	}
 	
-	public void AnimateBounceFinal(){
+	public void AnimateBounceFinal(object parameters){
 		
-		AnimateJump(bounceObject, down, finalPosition, delay);
+		AnimateJump(bounceObject, down, finalPosition, delay, onCompleteMethod, parameters);
 		
 	}
 	
@@ -118,7 +128,8 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
     /// Delay of the animation
     /// </param>
     ///
-    public static void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod, object parameters){
+    public static void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, 
+		string onCompleteMethod, object parameters){
         
 		Vector3 vertical = Vector3.zero;
 		Vector3 finalVertical = Vector3.zero;
@@ -190,7 +201,9 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	/// On complete method. If you want to continue or add logic after an animation
 	/// place the name of the method on this parameter, if you dont just leave it null or blank.
 	/// </param>
-	public static void AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod, object parameters){
+	public static void AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, 
+		string onCompleteMethod, object parameters){
+		
 		Vector3 finalMovement = finalPosition - objective.transform.position;
         Vector3 directionAxis = -down;// movement is countrary to down
         Vector3 upMovement = Vector3.Dot(directionAxis, finalMovement) * directionAxis;// MoveDirection*Quantity + offset
