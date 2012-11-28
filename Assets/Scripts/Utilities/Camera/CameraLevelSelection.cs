@@ -29,7 +29,9 @@ public class CameraLevelSelection : CameraDrive {
 			}else{
 				cubes[i].renderer.material=materials[16];
 			}
-		}	
+		}
+		cubep.Set(cubep.x,cubep.y-5,cubep.z);
+		error=0;
 		
 	}
 	
@@ -42,15 +44,15 @@ public class CameraLevelSelection : CameraDrive {
 			RaycastHit hit = new RaycastHit();
 			if(Physics.Raycast(ray,out hit,100)){
 				string name = hit.collider.gameObject.name;
-				if(hit.collider.gameObject.renderer.material != materials[16]){
-					Debug.Log(name);
+				if(hit.collider.gameObject.renderer.material.color != materials[16].color){
+					
 				}
 			}
 		}
 	}
 	
 	public void setLevels(List<string> levels){
-		for(int i = 0; i < levels.Count;i++){
+		/*for(int i = 0; i < levels.Count;i++){
 			if(int.Parse(levels[i]) > 7 ){
 				
 			}else if (cubes[int.Parse(levels[i])].renderer.material==materials[1]){
@@ -63,8 +65,12 @@ public class CameraLevelSelection : CameraDrive {
 				}
 			}
 			cubes[int.Parse(levels[i])].renderer.material=materials[2];
-		}
+		}*/
+		
 	}
 	
+	public enum Dias{
+		Lunes = 1, Martes, Miercoles, Jueves, Viernes
+	}
 	
 }
