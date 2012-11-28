@@ -12,14 +12,15 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	public static Vector3 down, middlePosition, finalPosition;
 	public static float delay;
 	public static string onCompleteMethod;
+	public static object parameters;
 	
 	void Start(){
-		
-
 		//float delay = AnimateShrink(gameObject, 0f);
 		//AnimateGrow(gameObject, delay);
 		
-		
+		ParticleEmitter emitter = (ParticleEmitter)gameObject.AddComponent("EllipsoidParticleEmitter");
+		emitter.emit = true;
+
 		
 		AnimateBounce(gameObject, 
 			new Vector3(0,-1,0),
@@ -47,20 +48,21 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	}
 	
 	public static void AnimateBounce(GameObject gameObject, Vector3 down, Vector3 middlePosition, 
-		Vector3 finalPosition, float delay, string onCompleteMethod, object parameters ){
+		Vector3 finalPosition, float delay, string onCompleteMethod, object parameters){
 		
 		AnimationHelper.finalPosition = finalPosition;
 		AnimationHelper.delay = delay;
 		AnimationHelper.down = down;
 		AnimationHelper.bounceObject = gameObject;
 		AnimationHelper.onCompleteMethod = onCompleteMethod;
+		AnimationHelper.parameters = parameters;
 		
-		AnimateJump(bounceObject, down, middlePosition, delay, "AnimateBounceFinal", parameters);
+		AnimateJump2(bounceObject, down, middlePosition, delay, "AnimateBounceFinal", null);
 	}
 	
-	public void AnimateBounceFinal(object parameters){
+	public void AnimateBounceFinal(){
 		
-		AnimateJump(bounceObject, down, finalPosition, delay, onCompleteMethod, parameters);
+		AnimateJump2(bounceObject, down, finalPosition, delay, onCompleteMethod, parameters);
 		
 	}
 	
@@ -68,7 +70,11 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	
 	#region Animate Size
 	
-	public float AnimateShrink(GameObject gameObject, float delay){			
+	public float AnimateShrink(GameObject gameObject, float delay){
+		return AnimateShrink(gameObject, delay, null, null);
+	}
+	
+	public float AnimateShrink(GameObject gameObject, float delay, string onCompleteMethod, object parameters){			
 		
 		Hashtable hs = new Hashtable();
 		
@@ -77,6 +83,13 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		hs.Add("time", 1.0f);
 		hs.Add("easetype",iTween.EaseType.easeInBack);
 		
+		if (onCompleteMethod != null && onCompleteMethod.Length > 0){
+			hs.Add("onComplete",onCompleteMethod);
+			hs.Add("onCompleteTarget",gameObject);
+			if (parameters != null){
+				hs.Add("oncompleteparams",parameters);
+			}
+		}
 		iTween.ScaleTo(gameObject, hs);
 		
 		delay+= 1.0f;
@@ -85,6 +98,10 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	}
 	
 	public float AnimateGrow(GameObject gameObject, float delay){
+			return AnimateGrow(gameObject, delay, null, null);
+	}
+	
+	public float AnimateGrow(GameObject gameObject, float delay, string onCompleteMethod, object parameters){	
 		
 		Hashtable hs = new Hashtable();
 		
@@ -93,6 +110,13 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		hs.Add("time", 0.5f);
 		hs.Add("easetype",iTween.EaseType.spring);
 		
+		if (onCompleteMethod != null && onCompleteMethod.Length > 0){
+			hs.Add("onComplete",onCompleteMethod);
+			hs.Add("onCompleteTarget",gameObject);
+			if (parameters != null){
+				hs.Add("oncompleteparams",parameters);
+			}
+		}
 		iTween.ScaleTo(gameObject, hs);
 		
 		delay+= 0.5f;
@@ -103,6 +127,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	#endregion
 	
 	#region Animate Jumps
+	
 	public static void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
 		AnimateJump(objective,down,finalPosition,delay,null,null);
 	}
@@ -249,14 +274,12 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		}
 	}
 	
-	#endregion
-	
 	/// <summary>
 	/// Method that is called once the originTemp is finished rotating
 	/// The idea is to remove rotationGameObject from its parent originTemp
 	/// to bring it back to its normal state
 	/// </summary>
-	public static void RotationFinished(){
+	public void RotationFinished(){
 		if (originTemp != null){
 			rotationGameObject.transform.parent = null;
 			rotationGameObject = null;
@@ -264,7 +287,11 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		}
 	}
 
-    /// <summary>
+	#endregion
+	
+	#region Animate Slide
+	
+	/// <summary>
    /// Animates the slide movement of a cube.
    /// </summary>
    /// <returns>
@@ -279,7 +306,6 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
    /// <param name='delay'>
    /// Total Delay. It takes into acount the delay parameter
    /// </param>
-
    public static float AnimateSlide(GameObject gameObject, Vector3 finalPosition, float delay){
        Vector3 direction = finalPosition - gameObject.transform.position;
        float time = direction.magnitude * 0.2f;
@@ -288,4 +314,5 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
        return delay + time;
    }
 	
+	#endregion
 }
