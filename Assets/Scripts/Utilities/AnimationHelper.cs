@@ -1,11 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
-public class AnimationHelper{
+public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	
 	float offset = 0.4f;
 	GameObject originTemp; // Its used to change the origin of the gameObject
-
+	
+	
+	void Start(){
+		// Animation test code
+	}
+	
+	
 	private Hashtable getBasicHs(Vector3 amount,float time, float delay, iTween.EaseType easeType){
        Hashtable hs = new Hashtable();
        hs.Add("amount",amount);
@@ -47,7 +53,6 @@ public class AnimationHelper{
         Vector3 rotationAxis = Vector3.Cross(sideDirection,down) * 90;
         Vector3 sideMovement = finalMovement - upMovement + vectorOffset;
        
-        print (sideDirection);
         Hashtable hs = getBasicHs(upMovement, 0.5f, delay, iTween.EaseType.spring);
         iTween.MoveAdd(objective, hs);
            

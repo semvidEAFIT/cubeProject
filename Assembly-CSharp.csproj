@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Utilities\IClickable.cs" />
      <Compile Include="Assets\Scripts\Utilities\Selector.cs" />
      <Compile Include="Assets\Scripts\Utilities\Vector3EqualityComparer.cs" />
+     <Compile Include="Assets\Scripts\Utilities\iTween\Plugins\iTween.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
