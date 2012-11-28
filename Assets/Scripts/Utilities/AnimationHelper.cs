@@ -9,8 +9,8 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	
 	void Start(){
 		// Animation test code
-		AnimateJump(gameObject,new Vector3(0,-1,0),transform.position + new Vector3(1,-1,0),0f,"");
-
+		float delay = AnimateShrink(gameObject, 0f);
+		AnimateGrow(gameObject, delay);
 		//AnimateJump2(gameObject,new Vector3(0,-1,0),transform.position + new Vector3(1,0,0),0f,"Test");
 	}
 	
@@ -24,6 +24,44 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
        hs.Add("easetype",easeType.ToString());
        return hs;
    }
+	
+	public void AnimateBounce(GameObject gameObject, Vector3 down, Vector3 middlePosition, Vector3 finalPosition, float delay){
+		AnimateJump (gameObject, down, middlePosition, delay);
+		
+		AnimateJump (gameObject, down, finalPosition, delay);
+	}
+	
+	public float AnimateShrink(GameObject gameObject, float delay){			
+		
+		Hashtable hs = new Hashtable();
+		
+		hs.Add("scale",new Vector3(0.01f, 0.01f, 0.01f));
+		hs.Add("delay", delay);
+		hs.Add("time", 1.0f);
+		hs.Add("easetype",iTween.EaseType.easeInBack);
+		
+		iTween.ScaleTo(gameObject, hs);
+		
+		delay+= 1.0f;
+		
+		return delay;
+	}
+	
+	public float AnimateGrow(GameObject gameObject, float delay){
+		
+		Hashtable hs = new Hashtable();
+		
+		hs.Add("scale",new Vector3(1.0f, 1.0f, 1.0f));
+		hs.Add("delay", delay);
+		hs.Add("time", 0.5f);
+		hs.Add("easetype",iTween.EaseType.spring);
+		
+		iTween.ScaleTo(gameObject, hs);
+		
+		delay+= 0.5f;
+		
+		return delay;
+	}
 	
 	#region Animate Jumps
 	void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
@@ -178,7 +216,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		}
 	}
 
-  /// <summary>
+    /// <summary>
    /// Animates the slide movement of a cube.
    /// </summary>
    /// <returns>
@@ -193,7 +231,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
    /// <param name='delay'>
    /// Total Delay. It takes into acount the delay parameter
    /// </param>
-   float AnimateSlide(GameObject gameObject, Vector3 finalPosition, float delay){
+    float AnimateSlide(GameObject gameObject, Vector3 finalPosition, float delay){
        Vector3 direction = finalPosition - gameObject.transform.position;
        float time = direction.magnitude * 0.2f;
        Hashtable hs = getBasicHs(direction, time, delay, iTween.EaseType.spring);
