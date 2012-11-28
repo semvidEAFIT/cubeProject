@@ -13,7 +13,7 @@ public abstract class Command {
         set { listener = value; }
     }
     
-    protected void EndExecution(){
+    public void EndExecution(){
         listener.CommandFinished(this);
     }
 

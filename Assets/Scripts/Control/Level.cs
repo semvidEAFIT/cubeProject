@@ -85,4 +85,14 @@ public class Level : MonoBehaviour
             }
         }
     }
+	
+	/*void Update(){
+		foreach(Vector3 v in entities.Keys){
+			if(entities[v] is Cube)
+			{
+				Debug.Log(v);
+			}
+		}
+		
+	}*/
 }
