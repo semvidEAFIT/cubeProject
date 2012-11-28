@@ -41,6 +41,11 @@ public class Cube : Entity, IClickable{
 	}
 	
 	public void OrganizeTransform(){
+		Transform obj = gameObject.transform.parent;
+		transform.parent = null;
+		if (obj != null){
+			MonoBehaviour.Destroy(obj.gameObject);
+		}
 		transform.position = Vector3Round(transform.position);
 		transform.rotation = Quaternion.Euler(Vector3Round(transform.rotation.eulerAngles));
 	}
