@@ -48,7 +48,6 @@
      <Compile Include="Assets\Scripts\Characters\Commands\Command.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Duplicate.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Move.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\OutOfBounds.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Slide.cs" />
      <Compile Include="Assets\Scripts\Characters\CubeControllers\CubeController.cs" />
      <Compile Include="Assets\Scripts\Characters\CubeControllers\CubeControllerInput.cs" />

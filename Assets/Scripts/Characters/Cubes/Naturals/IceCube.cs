@@ -5,21 +5,11 @@ public class IceCube : Cube {
 	public override Command[] Options {
 		get {
 			List<Command> commands = new List<Command>();
-			commands.Add(new Slide(this, CubeHelper.GetLastPositionInDirection(transform.position,Vector3.forward), Vector3.forward));
-            commands.Add(new Slide(this, CubeHelper.GetLastPositionInDirection(transform.position, Vector3.forward * -1.0f), Vector3.forward * -1.0f));
-            commands.Add(new Slide(this, CubeHelper.GetLastPositionInDirection(transform.position, Vector3.right), Vector3.right));
-            commands.Add(new Slide(this, CubeHelper.GetLastPositionInDirection(transform.position, Vector3.right * -1.0f), Vector3.right * -1.0f));
-
+            commands.AddRange(base.Options);
             for (int i = 0; i < commands.Count; i++ )
             {
-                Command c = commands[i];
-                if (c.EndPosition == transform.position && c is Slide)
-                {
-                    Move move = new Move(this, CubeHelper.GetTopPosition(transform.position + ((Slide)c).Direction));
-                    if (move.EndPosition.y - transform.position.y <= 1)
-                    {
-                        commands.Add(move);
-                    }
+                if(commands[i].EndPosition.y == transform.position.y){
+                    commands.Add(new Slide(this, CubeHelper.GetLastPositionInDirection(transform.position, (commands[i].EndPosition - transform.position).normalized), (commands[i].EndPosition - transform.position).normalized));
                     commands.RemoveAt(i);
                 }
             }
