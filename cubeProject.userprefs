@@ -1,6 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\Cubes\Cube.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Control\GameController.cs" Line="11" Column="6" />
+      <File FileName="Assets\Scripts\Characters\Commands\Bounce.cs" Line="12" Column="3" />
+      <File FileName="Assets\Scripts\Characters\Cubes\Cube.cs" Line="30" Column="27" />
+      <File FileName="Assets\Scripts\Characters\Commands\Move.cs" Line="13" Column="10" />
+      <File FileName="Assets\Scripts\Characters\CubeControllers\CubeController.cs" Line="43" Column="6" />
+      <File FileName="Assets\Scripts\Characters\CubeControllers\CubeControllerInput.cs" Line="29" Column="26" />
+      <File FileName="Assets\Scripts\Utilities\Vector3EqualityComparer.cs" Line="17" Column="68" />
+      <File FileName="Assets\Scripts\Control\Entity.cs" Line="8" Column="41" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
