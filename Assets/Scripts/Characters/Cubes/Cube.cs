@@ -25,10 +25,10 @@ public class Cube : Entity, IClickable{
     public virtual Command[] Options{ 
         get {
             List<Command> options = new List<Command>();
-            options.Add(new Move(this, GetTopPosition(Vector3.forward)));
-            options.Add(new Move(this, GetTopPosition(Vector3.forward * -1.0f)));
-            options.Add(new Move(this, GetTopPosition(Vector3.right)));
-            options.Add(new Move(this, GetTopPosition(Vector3.right * -1.0f)));
+            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position+Vector3.forward)));
+            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.forward * -1.0f)));
+            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.right)));
+            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.right * -1.0f)));
 
             for (int i = 0; i < options.Count; i++ )
             {
@@ -48,32 +48,6 @@ public class Cube : Entity, IClickable{
 
             return options.ToArray();
         }
-    }
-
-    public virtual Vector3 GetTopPosition(Vector3 direction)
-    {
-        Vector3 nextPosition = transform.position + direction.normalized;
-        bool isFree = !Level.Singleton.Entities.ContainsKey(nextPosition);
-        if (!isFree)
-        {
-            while (!isFree) {
-                nextPosition.y += 1.0f;
-                isFree = !Level.Singleton.Entities.ContainsKey(nextPosition);
-            }
-        }
-        else
-        {
-            while (isFree) {
-                nextPosition.y -= 1.0f;
-                isFree = !Level.Singleton.Entities.ContainsKey(nextPosition);
-                if(nextPosition.y < 0){
-                    break;
-                }
-            }
-            nextPosition.y += 1.0f;
-        }
-
-        return nextPosition;
     }
 
     public void FallOutOfBounds()
