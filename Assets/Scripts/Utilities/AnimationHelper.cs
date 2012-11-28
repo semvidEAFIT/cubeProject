@@ -282,6 +282,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	/// </summary>
 	public void RotationFinished(){
 		if (originTemp != null){
+			print ("entro");
 			rotationGameObject.transform.parent = null;
 			rotationGameObject = null;
 			MonoBehaviour.Destroy(originTemp);
