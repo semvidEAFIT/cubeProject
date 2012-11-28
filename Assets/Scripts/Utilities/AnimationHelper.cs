@@ -3,19 +3,23 @@ using System.Collections;
 
 public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	
-	float offset = 0.4f;
-	GameObject originTemp; // Its used to change the origin of the gameObject
-	GameObject rotationGameObject;
+	public static float offset = 0.4f;
+	public static GameObject originTemp; // Its used to change the origin of the gameObject
+	public static GameObject rotationGameObject;
 	
 	void Start(){
 		// Animation test code
-		AnimateJump(gameObject,new Vector3(0,-1,0),transform.position + new Vector3(1,-1,0),0f,"");
+		AnimateJump(gameObject,new Vector3(0,-1,0),transform.position + new Vector3(1,-1,0),0f,"Seguir");
 
 		//AnimateJump2(gameObject,new Vector3(0,-1,0),transform.position + new Vector3(1,0,0),0f,"Test");
 	}
 	
+	void Seguir(){
+		AnimateJump(gameObject,new Vector3(0,-1,0),transform.position + new Vector3(1,-1,0),0f);
+	}
 	
-	private Hashtable getBasicHs(Vector3 amount,float time, float delay, iTween.EaseType easeType){
+	
+	private static Hashtable getBasicHs(Vector3 amount,float time, float delay, iTween.EaseType easeType){
        Hashtable hs = new Hashtable();
        hs.Add("amount",amount);
        hs.Add("time",time);
@@ -26,7 +30,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
    }
 	
 	#region Animate Jumps
-	void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
+	public static void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
 		AnimateJump(objective,down,finalPosition,delay,null);
 	}
 	
@@ -51,7 +55,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
     /// Delay of the animation
     /// </param>
     ///
-    void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod){
+    public static void AnimateJump(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod){
         
 		Vector3 vertical = Vector3.zero;
 		Vector3 finalVertical = Vector3.zero;
@@ -69,7 +73,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		} else if (Vector3.Dot(down,upMovement) > 0){
 			// Going Down
 			vertical = vectorOffset;
-			finalVertical = upMovement -vertical;
+			finalVertical = upMovement - vertical;
 		} else {
 			// Moving to the side
 			vertical = vectorOffset;
@@ -97,7 +101,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
         delay += 0.5f;
     }
 	
-	void AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
+	public static void AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay){
 		AnimateJump2(objective,down,finalPosition,delay,null);
 	}
 	
@@ -120,7 +124,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	/// On complete method. If you want to continue or add logic after an animation
 	/// place the name of the method on this parameter, if you dont just leave it null or blank.
 	/// </param>
-	void AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod){
+	public static void AnimateJump2(GameObject objective, Vector3 down, Vector3 finalPosition, float delay, string onCompleteMethod){
 		Vector3 finalMovement = finalPosition - objective.transform.position;
         Vector3 directionAxis = -down;// movement is countrary to down
         Vector3 upMovement = Vector3.Dot(directionAxis, finalMovement) * directionAxis;// MoveDirection*Quantity + offset
@@ -170,7 +174,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	/// The idea is to remove rotationGameObject from its parent originTemp
 	/// to bring it back to its normal state
 	/// </summary>
-	void RotationFinished(){
+	public static void RotationFinished(){
 		if (originTemp != null){
 			rotationGameObject.transform.parent = null;
 			rotationGameObject = null;
@@ -193,7 +197,7 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
    /// <param name='delay'>
    /// Total Delay. It takes into acount the delay parameter
    /// </param>
-   float AnimateSlide(GameObject gameObject, Vector3 finalPosition, float delay){
+   public static float AnimateSlide(GameObject gameObject, Vector3 finalPosition, float delay){
        Vector3 direction = finalPosition - gameObject.transform.position;
        float time = direction.magnitude * 0.2f;
        Hashtable hs = getBasicHs(direction, time, delay, iTween.EaseType.spring);
