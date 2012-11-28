@@ -1,5 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\Cubes\Cube.cs">
     <Files>
       <File FileName="Assets\Scripts\Control\GameController.cs" Line="11" Column="6" />
@@ -10,6 +11,11 @@
       <File FileName="Assets\Scripts\Characters\CubeControllers\CubeControllerInput.cs" Line="29" Column="26" />
       <File FileName="Assets\Scripts\Utilities\Vector3EqualityComparer.cs" Line="17" Column="68" />
       <File FileName="Assets\Scripts\Control\Entity.cs" Line="8" Column="41" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Utilities/AnimationHelper.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Utilities/AnimationHelper.cs" Line="110" Column="28" />
+>>>>>>> 91a9cf2e637416606383ec108e0d41deda247bd0
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
