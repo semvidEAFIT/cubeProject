@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RubberCube : Cube {
 	
@@ -11,81 +12,69 @@ public class RubberCube : Cube {
 	
 	public override Command[] Options {
 		get {
-			Command[] options = new Command[4];
-			if((transform.position.y > CubeHelper.GetTopPosition(transform.position+Vector3.forward).y) 
-				&& (transform.position.y >= GetNextBouncePosition(transform.position+Vector3.forward).y))
-			{
-                options[0] = new Bounce(this, GetNextBouncePosition(Vector3.forward), CubeHelper.GetTopPosition(transform.position+Vector3.forward));
+			
+			List<Command> commands = new List<Command>();
+			
+			SideOptions(commands,Vector3.forward);
+			SideOptions(commands,Vector3.back);
+			SideOptions(commands,Vector3.right);
+			SideOptions(commands,Vector3.left);
+			
+			Command[] options = new Command[commands.Count];
+			for (int i = 0 ; i < commands.Count ; i++){
+				options[i] = commands[i];
 			}
-			else
-			{
-                options[0] = new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.forward));
-			}
-
-            if ((transform.position.y > CubeHelper.GetTopPosition(transform.position + Vector3.forward * -1.0f).y) 
-				&& (transform.position.y >= GetNextBouncePosition(Vector3.forward * -1.0f).y))
-			{
-                options[1] = new Bounce(this, GetNextBouncePosition(Vector3.forward * -1.0f), CubeHelper.GetTopPosition(transform.position + Vector3.forward * -1.0f));
-			}
-			else
-			{
-                options[1] = new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.forward * -1.0f));
-			}
-
-            if ((transform.position.y > CubeHelper.GetTopPosition(transform.position + Vector3.right).y) 
-				&& (transform.position.y >= GetNextBouncePosition(Vector3.right).y))
-			{
-                options[2] = new Bounce(this, GetNextBouncePosition(Vector3.right), CubeHelper.GetTopPosition(transform.position + Vector3.right));
-			}
-			else
-			{
-                options[2] = new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.right));
-			}
-
-            if ((transform.position.y > CubeHelper.GetTopPosition(transform.position + Vector3.right * -1.0f).y) 
-				&& (transform.position.y >= GetNextBouncePosition(Vector3.right * -1.0f).y))
-			{
-                options[3] = new Bounce(this, GetNextBouncePosition(Vector3.right * -1.0f), CubeHelper.GetTopPosition(transform.position + Vector3.right * -1.0f));
-			}
-            else
-			{
-                options[3] = new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.right * -1.0f));
-			}
-
-            for (int i = 0; i < 4; i++ )
-            {
-                if (options[i].EndPosition.x >= Level.Dimension || options[i].EndPosition.x < 0 || options[i].EndPosition.z >= Level.Dimension || options[i].EndPosition.z < 0)
-                {
-                    options[i] = new OutOfBounds(this, options[i].EndPosition);
-                }
-            }
-            Debug.Log(options[0] + "" +options[0].EndPosition);
-
             return options;
 		}
 	}
 	
-	private Vector3 GetNextBouncePosition(Vector3 direction)
+	private void SideOptions(List<Command> commands, Vector3 direction){
+		Vector3 currentPosition = transform.position + direction;
+		
+		if (Level.Singleton.Entities.ContainsKey(currentPosition)){
+			Entity entity = Level.Singleton.Entities[currentPosition];
+			// Check if cubes exists on top of me
+			if (!Level.Singleton.Entities.ContainsKey(currentPosition + Vector3.up)){
+				commands.Add(new Move(this,currentPosition + Vector3.up));
+			}
+		}else{
+			if (Level.Singleton.Entities.ContainsKey(currentPosition + Vector3.down)){
+				commands.Add(new Move(this,currentPosition));
+			}else{
+				int jumpSize = CubeHelper.GetDifferenceInDirection(currentPosition,Vector3.down) - 1;
+				Vector3 jumpPosition = currentPosition + (jumpSize * Vector3.down);
+				List<Vector3> jumpPositions = new List<Vector3>();
+				jumpPositions.Add(jumpPosition);
+				if (Level.Singleton.Entities.ContainsKey(currentPosition + direction)){
+					//Cae en el mismo lugar donde salto por su primera vez
+					commands.Add(new Bounce(this,jumpPosition,jumpPositions));
+				}else{
+					//Puede seguir reborando
+					JumpRecursive(jumpPosition, commands,jumpPositions,direction);
+				}
+			}
+		}
+	}
+	
+	private void JumpRecursive(Vector3 currentPosition, List<Command> commands, List<Vector3> jumpPositions, Vector3 direction)
 	{
-		Vector3 nextBouncePosition = transform.position + 2 * direction.normalized;
-		
-		bool isFreeToBounce = !Level.Singleton.Entities.ContainsKey(nextBouncePosition);
-		
-		if (isFreeToBounce)
-        {
-            while (isFreeToBounce) 
-			{
-                nextBouncePosition.y -= 1.0f;
-                isFreeToBounce = !Level.Singleton.Entities.ContainsKey(nextBouncePosition);
-                if(nextBouncePosition.y < 0)
-				{
-                    break;
-                }
-            }
-            nextBouncePosition.y += 1.0f;
-        }
-		else return transform.position;
-		
-		return nextBouncePosition;
+		Vector3 nextPosition = currentPosition + direction;
+		if (Level.Singleton.Entities.ContainsKey(nextPosition + Vector3.down)){
+			// exite piso osea que salte por ultima vez
+			commands.Add(new Bounce(this,nextPosition,jumpPositions));
+		}else{
+			// Sigue la recursividad
+			int jumpSize = CubeHelper.GetDifferenceInDirection(nextPosition,Vector3.down) - 1;
+			Vector3 jumpPosition = nextPosition + Vector3.down *jumpSize ; // changed multiply
+			JumpRecursive(jumpPosition,commands,jumpPositions,direction);
+		}
+	}
+	
+	public void Bounce(Vector3 endPosition, List<Vector3> bouncePositions){
+		 Level.Singleton.Entities.Remove(transform.position);
+		transform.position = endPosition;
+		//AnimationHelper.AnimateSlide(gameObject,endPosition,0f,"SlideEndExecution",new float[]{direction.x,direction.y,direction.z});
+        Level.Singleton.Entities.Add(endPosition, this);
+		EndExecution();
 	}
 }

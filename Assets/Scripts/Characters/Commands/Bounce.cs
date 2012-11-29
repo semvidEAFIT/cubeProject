@@ -1,25 +1,32 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Bounce : Command {
 	
-	Vector3 intermediate;
+	private List<Vector3> bouncePositions;
 		
 	// Use this for initialization
-	public Bounce(Cube receiver, Vector3 endPosition, Vector3 intermediate) : base(receiver, endPosition)
+	public Bounce(RubberCube receiver, Vector3 endPosition, List<Vector3> bouncePositions) : base(receiver, endPosition)
 	{
-		this.intermediate = intermediate;
+		this.bouncePositions = bouncePositions;
 	}
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
-	
+
 	public override void Execute ()
 	{
 		//Cube.MoveTo(intermediate);
-		Cube.MoveTo(EndPosition);
-		EndExecution();
+		//Cube.MoveTo(EndPosition);
+		//AnimationHelper.AnimateBounce(Cube,Vector3.down,bouncePosition,EndPosition);
+		((RubberCube)Cube).Bounce(EndPosition,bouncePositions);
+		//EndExecution();
+	}
+
+	public List<Vector3> BouncePositions {
+		get {
+			return this.bouncePositions;
+		}
+		set {
+			bouncePositions = value;
+		}
 	}
 }
