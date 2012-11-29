@@ -1,13 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Utilities\Camera\CameraLevelSelection.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\Cubes\Scientific\TwinCube.cs">
     <Files>
-<<<<<<< HEAD
-      <File FileName="Assets\Scripts\Utilities\Camera\CameraLevelSelection.cs" Line="49" Column="2" />
-      <File FileName="Assets\Scripts\Utilities\Camera\CameraDrive.cs" Line="34" Column="3" />
-=======
-      <File FileName="Assets\Scripts\Utilities\Camera\CameraLevelSelection.cs" Line="4" Column="1" />
->>>>>>> 82615f9adf3adbc1225486f987fa442916eafc75
+      <File FileName="Assets\Scripts\Characters\Cubes\Cube.cs" Line="50" Column="10" />
+      <File FileName="Assets\Scripts\Characters\Cubes\Scientific\TwinCube.cs" Line="14" Column="30" />
+      <File FileName="Assets\Scripts\Characters\Cubes\Industrials\RubberCube.cs" Line="55" Column="21" />
+      <File FileName="Assets\Scripts\Characters\Commands\Mimic.cs" Line="10" Column="104" />
+      <File FileName="Assets\Scripts\Characters\Commands\Bounce.cs" Line="16" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
