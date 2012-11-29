@@ -38,10 +38,12 @@ public class CloudCube : Cube {
 						break;
 					}
 					
-					if(transform.position.y-2>=0){
-						Debug.Log("abajo");
-					}
-					if( transform.position.y-2 > 0 && !Level.Singleton.Entities.ContainsKey(new Vector3(transform.position.x+direction.x,transform.position.y-2,transform.position.z+direction.z))&& !Level.Singleton.Entities.ContainsKey(new Vector3(transform.position.x+direction.x,transform.position.y-1,transform.position.z+direction.z))){
+					
+					if( transform.position.y-2 > 0 
+						&& !CubeHelper.IsFree(new Vector3(transform.position.x+direction.x,transform.position.y-2,transform.position.z+direction.z)) 
+						&& !CubeHelper.IsFree(new Vector3(transform.position.x+direction.x,transform.position.y-1,transform.position.z+direction.z))
+						&& !CubeHelper.IsFree(new Vector3(transform.position.x+direction.x,transform.position.y,transform.position.z+direction.z))
+						){
 	            		options.Add( new Hang(this, GetNextPositionCloude(direction)));
 					}else{
 						
