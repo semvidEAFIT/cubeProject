@@ -18,6 +18,6 @@ public class Slide : Command {
 		if(EndPosition.x >= Level.Dimension || EndPosition.x < 0 || EndPosition.z >= Level.Dimension || EndPosition.z < 0){
 			Cube.FallOutOfBounds();
 		}
-        EndExecution();
+        //EndExecution();
 	}
 }

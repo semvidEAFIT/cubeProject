@@ -66,11 +66,11 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	
 	#region Animate Size
 	
-	public float AnimateShrink(GameObject gameObject, float delay){
+	public static float AnimateShrink(GameObject gameObject, float delay){
 		return AnimateShrink(gameObject, delay, null, null);
 	}
 	
-	public float AnimateShrink(GameObject gameObject, float delay, string onCompleteMethod, object parameters){			
+	public static float AnimateShrink(GameObject gameObject, float delay, string onCompleteMethod, object parameters){			
 		
 		Hashtable hs = new Hashtable();
 		
@@ -93,11 +93,11 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		return delay;
 	}
 	
-	public float AnimateGrow(GameObject gameObject, float delay){
+	public static float AnimateGrow(GameObject gameObject, float delay){
 			return AnimateGrow(gameObject, delay, null, null);
 	}
 	
-	public float AnimateGrow(GameObject gameObject, float delay, string onCompleteMethod, object parameters){	
+	public static float AnimateGrow(GameObject gameObject, float delay, string onCompleteMethod, object parameters){	
 		
 		Hashtable hs = new Hashtable();
 		

@@ -33,7 +33,9 @@ public class Cube : Entity, IClickable{
 	
 	public void EndExecution(){
 		OrganizeTransform();
-		command.EndExecution();
+		if(command != null){
+			command.EndExecution();
+		}
 	}
 	
 	private Vector3 Vector3Round(Vector3 v){
