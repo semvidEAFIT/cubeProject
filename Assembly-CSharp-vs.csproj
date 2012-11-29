@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_0;UNITY_4_0;UNITY_STANDALONE_OSX;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_0;UNITY_4_0;UNITY_STANDALONE_WIN;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -37,15 +37,10 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity4.0/Editor/Data/Managed/UnityEditor.dll</HintPath>
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
-	</Reference>
-	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
-	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -71,17 +66,11 @@
      <Compile Include="Assets\Scripts\Environment\Terrains\Terrain.cs" />
      <Compile Include="Assets\Scripts\Props\Sensors\NormalPushButton.cs" />
      <Compile Include="Assets\Scripts\Props\Sensors\Sensor.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Camera\CameraDrive.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Camera\CameraLevelSelection.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Clicker.cs" />
-     <Compile Include="Assets\Scripts\Utilities\CubeHelper.cs" />
-     <Compile Include="Assets\Scripts\Utilities\IClickable.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Selector.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Vector3EqualityComparer.cs" />
      <Compile Include="Assets\Scripts\Utilities\AnimationHelper.cs" />
      <Compile Include="Assets\Scripts\Utilities\Camera\CameraDrive.cs" />
      <Compile Include="Assets\Scripts\Utilities\Camera\CameraLevelSelection.cs" />
      <Compile Include="Assets\Scripts\Utilities\Clicker.cs" />
+     <Compile Include="Assets\Scripts\Utilities\CubeHelper.cs" />
      <Compile Include="Assets\Scripts\Utilities\IClickable.cs" />
      <Compile Include="Assets\Scripts\Utilities\Selector.cs" />
      <Compile Include="Assets\Scripts\Utilities\Vector3EqualityComparer.cs" />

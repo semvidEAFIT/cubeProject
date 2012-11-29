@@ -60,7 +60,6 @@ public class Cube : Entity, IClickable{
 
             for (int i = 0; i < options.Count; i++ )
             {
-				
                 if(options[i].EndPosition.y - transform.position.y > 1)
                 {
                     options.RemoveAt(i);
@@ -78,10 +77,14 @@ public class Cube : Entity, IClickable{
         }
     }
 
-    public void FallOutOfBounds()
+    public void FallOutOfBounds(Command command,Vector3 outOfBouncePosition)
     {
-        Destroy(gameObject);
+		AnimationHelper.AnimateSlide(gameObject,outOfBouncePosition + new Vector3(0,-10,0),1f,"KillCube",null);
     }
+	
+	public void KillCube(){
+		Destroy(gameObject);
+	}
 
     public void NotifyClick()
     {
