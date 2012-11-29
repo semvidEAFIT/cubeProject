@@ -27,7 +27,6 @@ public class CubeControllerInput : CubeController {
             Destroy(s.gameObject);
         }
         commands.Clear();
-
         foreach(Command c in Cube.Options){
             GameObject selectorGameObject = (GameObject)Instantiate(selectorCube);
             Selector selector = selectorGameObject.AddComponent<Selector>();
@@ -36,6 +35,7 @@ public class CubeControllerInput : CubeController {
             selectorGameObject.transform.position = c.EndPosition;
             commands.Add(selector, c);
         }
+		Debug.Log(Cube.transform.position);
     }
 
     void OnDestroy() { 
