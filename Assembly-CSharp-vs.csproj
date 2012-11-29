@@ -47,6 +47,7 @@
      <Compile Include="Assets\Scripts\Characters\Commands\Bounce.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Command.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Duplicate.cs" />
+     <Compile Include="Assets\Scripts\Characters\Commands\Hang.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Move.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Slide.cs" />
      <Compile Include="Assets\Scripts\Characters\CubeControllers\CubeController.cs" />
@@ -55,6 +56,7 @@
      <Compile Include="Assets\Scripts\Characters\Cubes\Industrials\RubberCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Magics\DuplicatorCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Magics\ImitatorCube.cs" />
+     <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\CloudCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\IceCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\RockCube.cs" />
      <Compile Include="Assets\Scripts\Control\Entity.cs" />
