@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class IceCube : Cube {
+	
 	public override Command[] Options {
 		get {
 			List<Command> commands = new List<Command>();
@@ -30,12 +31,26 @@ public class IceCube : Cube {
 	
 	public void Slide(Vector3 endPosition, Vector3 direction){
         Level.Singleton.Entities.Remove(transform.position);
-		transform.position = endPosition;
-        Level.Singleton.Entities.Add(transform.position, this);
-        Entity hit = CubeHelper.GetEntityInPosition(transform.position + direction.normalized);
-        if(hit is RockCube){ //Agregar cubo metal
-            Break();       
-        }
+		//transform.position = endPosition;
+		AnimationHelper.AnimateSlide(gameObject,endPosition,0f,"SlideEndExecution",new float[]{direction.x,direction.y,direction.z});
+        Level.Singleton.Entities.Add(endPosition, this);
+	}
+	
+	public void SlideEndExecution(object vals){
+		if(Command.EndPosition.x >= Level.Dimension 
+		|| Command.EndPosition.x < 0 
+		|| Command.EndPosition.z >= Level.Dimension 
+		|| Command.EndPosition.z < 0){
+			FallOutOfBounds(Command,Command.EndPosition);
+		}else{
+			float[] pos = (float[])vals;
+			Vector3 direction = new Vector3(pos[0],pos[1],pos[2]);
+	        Entity hit = CubeHelper.GetEntityInPosition(transform.position + direction.normalized);
+	        if(hit is RockCube){ //Agregar cubo metal
+	            Break();       
+	        }
+			EndExecution();
+		}
 	}
 
     private void Break() {
