@@ -18,7 +18,7 @@ public class DuplicatorCube : Cube {
 	
 	public void Duplicate(Vector3 newPosition){
 		GameObject newClone = (GameObject) Instantiate(clone, newPosition, transform.rotation);
-		CubesAnimations.AnimateDuplication(newClone);
+		CubeAnimations.AnimateDuplication(newClone);
         duplicateTimes--;
 	}
 }

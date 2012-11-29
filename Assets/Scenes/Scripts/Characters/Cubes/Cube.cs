@@ -27,7 +27,7 @@ public class Cube : Entity, IClickable{
 
     public virtual void MoveTo(Vector3 nextPosition) {
         Level.Singleton.Entities.Remove(transform.position);
-		AnimationHelper.AnimateJump2(gameObject,Vector3.down,nextPosition,0f,"EndExecution",null);
+		CubeAnimations.AnimateMove(gameObject, Vector3.down, nextPosition);
         Level.Singleton.Entities.Add(nextPosition, this);
     }
 	

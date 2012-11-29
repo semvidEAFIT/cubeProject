@@ -9,7 +9,9 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	
 	// Bounce Animation variables
 	public static GameObject bounceObject;
-	public static Vector3 down, middlePosition, finalPosition;
+	public static Vector3 down;
+	public static Vector3[] nextPositions;
+	public static int actualPosition;
 	public static float delay;
 	public static string onCompleteMethod;
 	public static object parameters;
@@ -18,11 +20,18 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 		//float delay = AnimateShrink(gameObject, 0f);
 		//AnimateGrow(gameObject, delay);
 		
+		/*
+		 * How to animatebounce
+		 * 
+		 * Vector3[] testPositions = {gameObject.transform.position + new Vector3(1,-1,0),
+		gameObject.transform.position + new Vector3(1,2,0) + new Vector3(1,-1,0),
+		gameObject.transform.position + new Vector3(1,2,0) + new Vector3(1,-1,0) + new Vector3(4,2,0)};
+		
 		AnimateBounce(gameObject, 
 			new Vector3(0,-1,0),
-			gameObject.transform.position + new Vector3(1,-1,0),
-			gameObject.transform.position + new Vector3(1,2,0) + new Vector3(1,-1,0), 
+			testPositions, 
 			0.0f);
+			*/
 	}
 	
 	private static Hashtable getBasicHs(Vector3 amount,float time, float delay, iTween.EaseType easeType){
@@ -37,28 +46,36 @@ public class AnimationHelper : MonoBehaviour{ //TODO quitar Monobehavior
 	
 	#region Animate Bounce
 	
-	public static void AnimateBounce(GameObject gameObject, Vector3 down, Vector3 middlePosition, 
-		Vector3 finalPosition, float delay){
+	public static void AnimateBounce(GameObject gameObject, Vector3 down, Vector3[] nextPositions, float delay){
 		
-		AnimateBounce(gameObject, down, middlePosition, finalPosition, delay, null, null);
+		AnimateBounce(gameObject, down, nextPositions, delay, null, null);
 	}
 	
-	public static void AnimateBounce(GameObject gameObject, Vector3 down, Vector3 middlePosition, 
-		Vector3 finalPosition, float delay, string onCompleteMethod, object parameters){
+	public static void AnimateBounce(GameObject gameObject, Vector3 down, Vector3[] nextPositions, float delay, 
+		string onCompleteMethod, object parameters){
 		
-		AnimationHelper.finalPosition = finalPosition;
+		AnimationHelper.actualPosition = 0;
+		AnimationHelper.nextPositions = nextPositions;
 		AnimationHelper.delay = delay;
 		AnimationHelper.down = down;
 		AnimationHelper.bounceObject = gameObject;
 		AnimationHelper.onCompleteMethod = onCompleteMethod;
 		AnimationHelper.parameters = parameters;
 		
-		AnimateJump2(bounceObject, down, middlePosition, delay, "AnimateBounceFinal", null);
+		AnimateJump2(bounceObject, down, nextPositions[actualPosition], delay, "AnimateBouncePositions", null);
 	}
 	
-	public void AnimateBounceFinal(){
+	/// <summary>
+	/// Animates each bounce position (using nextPositions) recursivelly.
+	/// </summary>
+	public void AnimateBouncePositions(){
 		
-		AnimateJump2(bounceObject, down, finalPosition, delay, onCompleteMethod, parameters);
+		actualPosition++;
+		if(actualPosition < nextPositions.Length-1){// The last last position should make the recursive call
+			AnimateJump2(bounceObject, down, nextPositions[actualPosition], delay, "AnimateBouncePositions", parameters);
+		}else{// This is the last movement
+			AnimateJump2(bounceObject, down, nextPositions[actualPosition], delay, onCompleteMethod, parameters);
+		}
 		
 	}
 	

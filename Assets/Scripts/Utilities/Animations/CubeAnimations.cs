@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CubesAnimations : MonoBehaviour
+public class CubeAnimations
 {
 	#region Diplicator Cube Animations
 	
@@ -12,6 +12,14 @@ public class CubesAnimations : MonoBehaviour
 		AnimationHelper.AnimateGrow(myGameObject, 0f, "EndExecution", myGameObject);
 		//AnimationHelper.AnimateGrow(myGameObject, 0f, "EndExecution", null);
 
+	}
+	
+	#endregion
+	
+	#region Generic Cube Animations
+	
+	public static void AnimateMove(GameObject gameObject, Vector3 down, Vector3 nextPosition){
+		AnimationHelper.AnimateJump2(gameObject, down,nextPosition,0f,"EndExecution",null);
 	}
 	
 	#endregion

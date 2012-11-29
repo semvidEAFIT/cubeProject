@@ -74,10 +74,9 @@
      <Compile Include="Assets\Scenes\Scripts\Utilities\Selector.cs" />
      <Compile Include="Assets\Scenes\Scripts\Utilities\Vector3EqualityComparer.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Hang.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Move.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\CloudCube.cs" />
      <Compile Include="Assets\Scripts\Utilities\Animations\AnimationHelper.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Animations\CubesAnimations.cs" />
+     <Compile Include="Assets\Scripts\Utilities\Animations\CubeAnimations.cs" />
      <Compile Include="Assets\Scripts\Utilities\iTween\Plugins\iTween.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
