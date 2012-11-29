@@ -15,6 +15,7 @@ public class Cube : Entity, IClickable{
 			command = value;
 		}
 	}
+	
     public bool IsSelected
     {
         get { return isSelected; }
