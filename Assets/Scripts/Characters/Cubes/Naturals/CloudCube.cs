@@ -61,13 +61,6 @@ public class CloudCube : Cube {
 	                {
 	                    options.RemoveAt(i);
 	                }
-	                else
-	                {
-	                    if (options[i].EndPosition.x >= Level.Dimension || options[i].EndPosition.x < 0 || options[i].EndPosition.z >= Level.Dimension || options[i].EndPosition.z < 0)
-	                    {
-	                        options[i] = new OutOfBounds(this, options[i].EndPosition);
-	                    }
-	                }
 	            }
 				
             	return options.ToArray();
