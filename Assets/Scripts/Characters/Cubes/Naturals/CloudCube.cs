@@ -53,6 +53,7 @@ public class CloudCube : Cube
 			
 				for (int i = 0; i < options.Count; i++) {
 					
+<<<<<<< HEAD
 					if (options [i].EndPosition.y - transform.position.y > 1) {
 						options.RemoveAt (i);
 					} else {
@@ -61,6 +62,13 @@ public class CloudCube : Cube
 						}
 					}
 				}
+=======
+	                if(options[i].EndPosition.y - transform.position.y > 1)
+	                {
+	                    options.RemoveAt(i);
+	                }
+	            }
+>>>>>>> 9a72fa277aa9f97db008dd86cf78565f7c60917e
 				
 				return options.ToArray ();
 			}
