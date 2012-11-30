@@ -12,8 +12,20 @@ public class ImitatorCube : Cube {
         isClone = false;
     }
 
+    public override bool IsSelected
+    {
+        get
+        {
+            return base.IsSelected && !isClone;
+        }
+        set
+        {
+            base.IsSelected = value;
+        }
+    }
     void Update() {
-        if (isClone && this.transform.position != imitated.transform.position) {
+        Vector3EqualityComparer comparer = new Vector3EqualityComparer();
+        if (isClone && comparer.Equals(transform.position, imitated.transform.position)) {
             if (CubeHelper.GetEntityInPosition(imitated.transform.position + Vector3.down) is Cube)
             {
                 Clone(CubeHelper.GetEntityInPosition(imitated.transform.position + Vector3.down));
@@ -34,6 +46,7 @@ public class ImitatorCube : Cube {
             Debug.Log("Clone!");
             collider.enabled = false;
             renderer.enabled = false;
+            Debug.Log(renderer.enabled);
             transform.position = nextPosition;
             Clone(CubeHelper.GetEntityInPosition(nextPosition + Vector3.down));
             Command.EndExecution();
@@ -42,7 +55,6 @@ public class ImitatorCube : Cube {
         {
             base.MoveTo(nextPosition);
         }
-        Command.EndExecution();
     }
 
     private void UnClone()
@@ -57,6 +69,7 @@ public class ImitatorCube : Cube {
     private void Clone(Entity e) {
         if(isClone){
             this.transform.position = imitated.transform.position;
+            Level.Singleton.Entities.Remove(this.transform.position);
             Destroy(imitated);
         }
 
@@ -106,6 +119,7 @@ public class ImitatorCube : Cube {
                     imitated = (GameObject)Instantiate(cubos[0]);
                     break;
         }
+        imitated.transform.position = this.transform.position;
         isClone = true;
     }
 }
