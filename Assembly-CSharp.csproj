@@ -67,12 +67,15 @@
      <Compile Include="Assets\Scenes\Scripts\Characters\CubeControllers\CubeController.cs" />
      <Compile Include="Assets\Scenes\Scripts\Characters\CubeControllers\CubeControllerInput.cs" />
      <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\Cube.cs" />
+     <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\Industrials\MetalCube.cs" />
      <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\Industrials\RubberCube.cs" />
      <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\Magics\DuplicatorCube.cs" />
      <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\Magics\ImitatorCube.cs" />
+     <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\Naturals\CloudCube.cs" />
      <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\Naturals\IceCube.cs" />
      <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\Naturals\RockCube.cs" />
      <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\Scientific\TwinCube.cs" />
+     <Compile Include="Assets\Scenes\Scripts\Characters\Cubes\WallWalkingCube.cs" />
      <Compile Include="Assets\Scenes\Scripts\Control\Entity.cs" />
      <Compile Include="Assets\Scenes\Scripts\Control\GameController.cs" />
      <Compile Include="Assets\Scenes\Scripts\Control\Level.cs" />

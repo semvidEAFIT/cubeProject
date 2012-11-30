@@ -13,7 +13,6 @@ public class IceCube : Cube {
                     commands.RemoveAt(i);
                 }
             }
-
             return commands.ToArray();
 		}	
 	}
