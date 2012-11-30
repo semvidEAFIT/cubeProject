@@ -31,7 +31,7 @@ public class CubeHelper {
         return position;
     }
     public static bool IsFree(Vector3 position) {
-        return Level.Singleton.Entities.ContainsKey(position);
+        return !Level.Singleton.Entities.ContainsKey(position);
     }
     public static Vector3 GetLastPositionInDirection(Vector3 position, Vector3 direction) {
 		int diff = GetDifferenceInDirection(position,direction.normalized);
@@ -63,7 +63,29 @@ public class CubeHelper {
         {
             return null;
         }
-        
+    }
+
+    public static Vector3[] GetPositionsAround(Vector3 position) {
+        List<Vector3> positionsAround = new List<Vector3>();
+        positionsAround.Add(position + Vector3.up);
+        positionsAround.Add(position + Vector3.down);
+        positionsAround.Add(position + Vector3.right);
+        positionsAround.Add(position + Vector3.left);
+        positionsAround.Add(position + Vector3.forward);
+        positionsAround.Add(position + Vector3.back);
+        return positionsAround.ToArray();
+    }
+
+    public static Entity[] GetEntitiesAround(Vector3 position) {
+        Vector3[] positionsAround = GetPositionsAround(position);
+        List<Entity> entitiesAround = new List<Entity>();
+        foreach(Vector3 v in positionsAround)
+        {
+            if (!IsFree(v)) {
+                entitiesAround.Add(GetEntityInPosition(v));
+            }
+        }
+        return entitiesAround.ToArray();
     }
 	
 	public static int GetDifferenceInDirection(Vector3 position, Vector3 direction){

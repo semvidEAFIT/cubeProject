@@ -53,6 +53,11 @@ public class RubberCube : Cube {
 					JumpRecursive(jumpPosition, commands,jumpPositions,direction);
 				}
 			}
+<<<<<<< HEAD
+=======
+
+            return options;
+>>>>>>> b119637261c615f04775455a894d1e68ccbe6498
 		}
 	}
 	
@@ -77,4 +82,11 @@ public class RubberCube : Cube {
         Level.Singleton.Entities.Add(endPosition, this);
 		EndExecution();
 	}
+	
+	public  void Bounce(Vector3 nextPosition) {
+        Level.Singleton.Entities.Remove(transform.position);
+        transform.position = nextPosition;
+        Level.Singleton.Entities.Add(transform.position, this);
+    }
+	
 }
