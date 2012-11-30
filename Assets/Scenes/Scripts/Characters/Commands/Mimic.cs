@@ -19,7 +19,6 @@ public class Mimic : Command {
 	
 	public override void Execute ()
 	{
-		
 		((TwinCube)Cube).Mimic(EndPosition,direction);
 		EndExecution();
 	}

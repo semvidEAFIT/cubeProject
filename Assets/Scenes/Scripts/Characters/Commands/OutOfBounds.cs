@@ -8,6 +8,6 @@ public class OutOfBounds : Command {
 
     public override void Execute()
     {
-        Cube.FallOutOfBounds();
+        Cube.FallOutOfBounds(this,EndPosition);
     }
 }

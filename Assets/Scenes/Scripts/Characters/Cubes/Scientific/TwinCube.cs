@@ -74,20 +74,15 @@ public class TwinCube :Cube {
 		return direction;
 	}
 	
-	public  void Mimic(Vector3 nextPosition, Vector3 direction) {
-	
-		
+	public void Mimic(Vector3 nextPosition, Vector3 direction) {
         Level.Singleton.Entities.Remove(transform.position);
-        transform.position = nextPosition;
+        CubeAnimations.AnimateMove(gameObject, Vector3.down, nextPosition);
         Level.Singleton.Entities.Add(transform.position, this);
        
 		Vector3 NextTwinPosition = twin.GetComponent<TwinCube>().FindNextTwinPosition(direction);
 		
 		Level.Singleton.Entities.Remove(twin.transform.position);
-		twin.transform.position = NextTwinPosition;
+		CubeAnimations.AnimateMove(twin, Vector3.down, NextTwinPosition);
 		Level.Singleton.Entities.Add(NextTwinPosition,twin.GetComponent<TwinCube>());
     }
 }
-	
-
-

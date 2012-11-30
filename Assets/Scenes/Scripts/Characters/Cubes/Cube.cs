@@ -15,6 +15,7 @@ public class Cube : Entity, IClickable{
 			command = value;
 		}
 	}
+	
     public bool IsSelected
     {
         get { return isSelected; }
@@ -27,13 +28,15 @@ public class Cube : Entity, IClickable{
 
     public virtual void MoveTo(Vector3 nextPosition) {
         Level.Singleton.Entities.Remove(transform.position);
-		AnimationHelper.AnimateJump2(gameObject,Vector3.down,nextPosition,0f,"EndExecution",null);
+		CubeAnimations.AnimateMove(gameObject, Vector3.down, nextPosition);
         Level.Singleton.Entities.Add(nextPosition, this);
     }
 	
 	public void EndExecution(){
 		OrganizeTransform();
-		command.EndExecution();
+		if(command != null){
+			command.EndExecution();
+		}
 	}
 	
 	private Vector3 Vector3Round(Vector3 v){
@@ -60,7 +63,6 @@ public class Cube : Entity, IClickable{
 
             for (int i = 0; i < options.Count; i++ )
             {
-				
                 if(options[i].EndPosition.y - transform.position.y > 1)
                 {
                     options.RemoveAt(i);
@@ -71,10 +73,14 @@ public class Cube : Entity, IClickable{
         }
     }
 
-    public void FallOutOfBounds()
+    public void FallOutOfBounds(Command command,Vector3 outOfBouncePosition)
     {
-        Destroy(gameObject);
+		AnimationHelper.AnimateSlide(gameObject,outOfBouncePosition + new Vector3(0,-10,0),1f,"KillCube",null);
     }
+	
+	public void KillCube(){
+		Destroy(gameObject);
+	}
 
     public void NotifyClick()
     {
