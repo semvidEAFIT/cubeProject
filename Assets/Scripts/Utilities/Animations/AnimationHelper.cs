@@ -13,7 +13,7 @@ public class AnimationHelper : MonoBehaviour
 	public static Vector3 down;
 	public static Vector3[] nextPositions;
 	public static int actualPosition;
-	public static float delay;
+	public static float bounceDelay;
 	public static string onCompleteMethod;
 	public static object parameters;
 	
@@ -22,6 +22,9 @@ public class AnimationHelper : MonoBehaviour
 		//float delay = AnimateShrink(gameObject, 0f);
 		//AnimateGrow(gameObject, delay);
 		
+		//iTween.ColorTo(gameObject, iTween.Hash("g", 2f, "looptype", iTween.LoopType.pingPong, "time", 0.1f));
+
+
 		/*
 		 * How to animatebounce
 		 * 
@@ -43,7 +46,18 @@ public class AnimationHelper : MonoBehaviour
 		hs.Add ("time", time);
 		hs.Add ("delay", delay);
 		hs.Add ("space", Space.World);
-		hs.Add ("easetype", easeType.ToString ());
+		hs.Add ("easetype", easeType);
+		return hs;
+	}
+	
+	private static Hashtable getBasicHsWithSpeed (Vector3 amount, float speed, float delay, iTween.EaseType easeType)
+	{
+		Hashtable hs = new Hashtable ();
+		hs.Add ("amount", amount);
+		hs.Add ("speed", speed);
+		hs.Add ("delay", delay);
+		hs.Add ("space", Space.World);
+		hs.Add ("easetype", easeType);
 		return hs;
 	}
 	
@@ -61,7 +75,7 @@ public class AnimationHelper : MonoBehaviour
 		
 		AnimationHelper.actualPosition = 0;
 		AnimationHelper.nextPositions = nextPositions;
-		AnimationHelper.delay = delay;
+		AnimationHelper.bounceDelay = delay;
 		AnimationHelper.down = down;
 		AnimationHelper.bounceObject = gameObject;
 		AnimationHelper.onCompleteMethod = onCompleteMethod;
@@ -78,9 +92,9 @@ public class AnimationHelper : MonoBehaviour
 		
 		actualPosition++;
 		if (actualPosition < nextPositions.Length - 1) {// The last last position should make the recursive call
-			AnimateJump2 (bounceObject, down, nextPositions [actualPosition], delay, "AnimateBouncePositions", parameters);
+			AnimateJump2 (bounceObject, down, nextPositions [actualPosition], bounceDelay, "AnimateBouncePositions", parameters);
 		} else {// This is the last movement
-			AnimateJump2 (bounceObject, down, nextPositions [actualPosition], delay, onCompleteMethod, parameters);
+			AnimateJump2 (bounceObject, down, nextPositions [actualPosition], bounceDelay, onCompleteMethod, parameters);
 		}
 		
 	}
@@ -177,7 +191,6 @@ public class AnimationHelper : MonoBehaviour
 	/// Delay of the animation
 	/// </param>
 	///
-
 	public static float AnimateJump (GameObject objective, Vector3 down, Vector3 finalPosition, float delay, 
 		string onCompleteMethod, object parameters)
 	{
@@ -258,40 +271,54 @@ public class AnimationHelper : MonoBehaviour
 	public static float AnimateJump2 (GameObject objective, Vector3 down, Vector3 finalPosition, float delay, 
 		string onCompleteMethod, object parameters)
 	{
-		
 		Vector3 finalMovement = finalPosition - objective.transform.position;
 		Vector3 directionAxis = -down;// movement is countrary to down
 		Vector3 upMovement = Vector3.Dot (directionAxis, finalMovement) * directionAxis;// MoveDirection*Quantity + offset
 		Vector3 sideDirection = (finalMovement - upMovement).normalized;
-		Vector3 rotationAxis = Vector3.Cross (sideDirection, down) * 90;
 		Vector3 sideMovement = finalMovement - upMovement;
-		
-		// Sets the new Origin to rotate around an specific Axis - originTemp
-		originTemp = new GameObject ("temp");
-		originTemp.transform.position = objective.transform.position + (down + sideDirection) / 2f;
-		objective.transform.parent = originTemp.transform;
-		rotationGameObject = objective;
+		Vector3 rotationAxis; // = Vector3.Cross (sideDirection, down) * 180;
+		//Values when is a falling movement
+		iTween.EaseType rotationEaseType = iTween.EaseType.spring;
+		float rotationTime = 0.2f;
 		
 		Hashtable hs;
 		
-		if (Vector3.Dot (down, upMovement) < 0) {
+		// Sets the new Origin to rotate around an specific Axis - originTemp
+		originTemp = new GameObject ("temp");
+		if (Vector3.Dot (down, upMovement) < 0) { // Check if cube is going to go up of something
+			
+			// Change rotation angle and point, and time
+			rotationAxis = Vector3.Cross (sideDirection, down) * 180;
+			originTemp.transform.position = objective.transform.position + (-down + sideDirection) / 2f;
+			rotationTime = 0.5f;
+			
 			// Jumps
-			hs = getBasicHs (upMovement, 0.5f, delay, iTween.EaseType.spring);
-			iTween.MoveAdd (originTemp, hs);
-			delay = delay + 0.5f;
+			//hs = getBasicHs (upMovement, 0.2f, delay, iTween.EaseType.spring);
+			//iTween.MoveAdd (originTemp, hs);
+			//delay = delay + 0.2f;
+			
+		}else{
+			
+			rotationEaseType = iTween.EaseType.linear;
+			rotationAxis = Vector3.Cross (sideDirection, down) * 90;
+			originTemp.transform.position = objective.transform.position + (down + sideDirection) / 2f;
+		
 		}
+		objective.transform.parent = originTemp.transform;
+		rotationGameObject = objective;
+		
 		// Rotates
-		hs = getBasicHs (rotationAxis, 0.5f, delay, iTween.EaseType.spring);
+		hs = getBasicHs (rotationAxis, rotationTime, delay, rotationEaseType);
 		hs.Add ("onComplete", "RotationFinished");
 		hs.Add ("onCompleteTarget", originTemp);
 		iTween.RotateAdd (originTemp, hs);
-		delay = delay + 0.5f;
-		
+		delay = delay + rotationTime;
+
 		if (Vector3.Dot (down, upMovement) > 0) {
 			// Goes Down
-			hs = getBasicHs (upMovement, 0.5f, delay, iTween.EaseType.spring);
+			hs = getBasicHs (upMovement, 0.2f, delay, iTween.EaseType.spring);
 			iTween.MoveAdd (objective, hs);
-			delay = delay + 0.5f;
+			delay = delay + 0.2f;
 		}
 		if (onCompleteMethod != null && onCompleteMethod.Length > 0) {
 			hs = getBasicHs (Vector3.zero, 0.0f, delay, iTween.EaseType.spring);
@@ -302,7 +329,7 @@ public class AnimationHelper : MonoBehaviour
 			}
 			iTween.MoveAdd (objective, hs);
 		}
-		
+
 		return delay;
 	}
 	
@@ -356,8 +383,10 @@ public class AnimationHelper : MonoBehaviour
             }
         }
 		iTween.MoveAdd (gameObject, hs);
+		
 		return delay + time;
 	}
 	
 	#endregion
+
 }

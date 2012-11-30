@@ -41,9 +41,14 @@
 	</Reference>
 	<Reference Include="UnityEditor">
 	  <HintPath>C:/Program Files (x86)/Unity4.0/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Pixelplacement\iTweenPath\iTweenPath.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Bounce.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Command.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Duplicate.cs" />
@@ -87,6 +92,7 @@
      <Compile Include="Assets\Scripts\Utilities\IClickable.cs" />
      <Compile Include="Assets\Scripts\Utilities\ILaserReactive.cs" />
      <Compile Include="Assets\Scripts\Utilities\Selector.cs" />
+     <Compile Include="Assets\Scripts\Utilities\Sprite.cs" />
      <Compile Include="Assets\Scripts\Utilities\Vector3EqualityComparer.cs" />
      <Compile Include="Assets\Scripts\Utilities\VectorHelper.cs" />
      <Compile Include="Assets\Scripts\Utilities\iTween\Plugins\iTween.cs" />
