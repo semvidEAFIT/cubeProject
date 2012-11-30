@@ -53,11 +53,6 @@ public class RubberCube : Cube {
 					JumpRecursive(jumpPosition, commands,jumpPositions,direction);
 				}
 			}
-<<<<<<< HEAD
-=======
-
-            return options;
->>>>>>> b119637261c615f04775455a894d1e68ccbe6498
 		}
 	}
 	
