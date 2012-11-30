@@ -20,6 +20,6 @@ public class Bounce : Command {
 	{
 		//Cube.MoveTo(intermediate);
 		((RubberCube)Cube).Bounce(EndPosition);
-		EndExecution();
+		//EndExecution();
 	}
 }

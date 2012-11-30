@@ -35,7 +35,6 @@ public class CloudCube : Cube
 						break;
 					}
 					
-<<<<<<< HEAD
 					
 					if( transform.position.y-2 > 0 
 						&& !CubeHelper.IsFree(new Vector3(transform.position.x+direction.x,transform.position.y-2,transform.position.z+direction.z)) 
@@ -44,14 +43,6 @@ public class CloudCube : Cube
 						){
 	            		options.Add( new Hang(this, GetNextPositionCloude(direction)));
 					}else{
-=======
-					if (transform.position.y - 2 >= 0) {
-						Debug.Log ("abajo");
-					}
-					if (transform.position.y - 2 > 0 && !Level.Singleton.Entities.ContainsKey (new Vector3 (transform.position.x + direction.x, transform.position.y - 2, transform.position.z + direction.z)) && !Level.Singleton.Entities.ContainsKey (new Vector3 (transform.position.x + direction.x, transform.position.y - 1, transform.position.z + direction.z))) {
-						options.Add (new Hang (this, GetNextPositionCloude (direction)));
-					} else {
->>>>>>> 89c8d088db79abd721fad425e0e75efc19541c40
 						
 						options.Add (new Move (this, GetNextPositionCloude (direction)));
 					}
@@ -64,27 +55,14 @@ public class CloudCube : Cube
 			
 				for (int i = 0; i < options.Count; i++) {
 					
-<<<<<<< HEAD
-					if (options [i].EndPosition.y - transform.position.y > 1) {
-						options.RemoveAt (i);
-					} else {
-						if (options [i].EndPosition.x >= Level.Dimension || options [i].EndPosition.x < 0 || options [i].EndPosition.z >= Level.Dimension || options [i].EndPosition.z < 0) {
-							options [i] = new OutOfBounds (this, options [i].EndPosition);
-						}
-					}
-				}
-=======
 	                if(options[i].EndPosition.y - transform.position.y > 1)
 	                {
 	                    options.RemoveAt(i);
 	                }
 	            }
->>>>>>> 9a72fa277aa9f97db008dd86cf78565f7c60917e
 				
 				return options.ToArray ();
 			}
-			
-			
 			
 			return options.ToArray ();
 		}
@@ -123,11 +101,11 @@ public class CloudCube : Cube
 
 	public void Hang (Vector3 nextPosition)
 	{
+        Debug.Log("Yeah");
 		fix = true;
 		Level.Singleton.Entities.Remove (transform.position);
 		//transform.position = nextPosition;
 		AnimationHelper.AnimateJump2 (gameObject, Vector3.down, nextPosition, 0f, "EndExecution", null);
 		Level.Singleton.Entities.Add (nextPosition, this);
-		
 	}
 }
