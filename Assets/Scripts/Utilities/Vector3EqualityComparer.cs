@@ -21,7 +21,9 @@ public class Vector3EqualityComparer : IEqualityComparer<Vector3>{
         string xcomp = (x >= 0) ? "0" + x.ToString() : "1" + Mathf.Abs(x).ToString(); //0 Positivo o 0, 1 Negativo
         string ycomp = (y >= 0) ? "0" + y.ToString() : "1" + Mathf.Abs(y).ToString(); //0 Positivo o 0, 1 Negativo
         string zcomp = (z >= 0) ? "0" + z.ToString() : "1" + Mathf.Abs(z).ToString(); //0 Positivo o 0, 1 Negativo
-        string hashCode = xcomp + ycomp + zcomp;
+       
+		string hashCode = xcomp + ycomp + zcomp;
+		
         return (int.Parse(hashCode));
     }
 }

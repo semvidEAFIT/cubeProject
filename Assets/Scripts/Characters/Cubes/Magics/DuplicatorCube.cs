@@ -17,15 +17,10 @@ public class DuplicatorCube : Cube {
 	}
 	
 	public void Duplicate(Vector3 newPosition){
-<<<<<<< HEAD
-		GameObject newClone = (GameObject) Instantiate(clone, newPosition, transform.rotation);
-		CubeAnimations.AnimateDuplication(newClone);
-        duplicateTimes--;
-=======
 		if(duplicateTimes > 0 && CubeHelper.IsFree(transform.position + Vector3.up)){
-            Instantiate(clone, newPosition, transform.rotation)	;
+            GameObject newClone = (GameObject) Instantiate(clone, newPosition, transform.rotation);
+		    CubeAnimations.AnimateDuplication(newClone);
             duplicateTimes--;
         }
->>>>>>> 4f31885f09ac2a535bfda3d3cef97a732d521ce5
 	}
 }

@@ -71,7 +71,7 @@ public class Cube : Entity, IClickable{
 
     public void FallOutOfBounds(Command command,Vector3 outOfBouncePosition)
     {
-		AnimationHelper.AnimateSlide(gameObject,outOfBouncePosition + new Vector3(0,-10,0),1f,"KillCube",null);
+		AnimationHelper.AnimateSlide(gameObject,outOfBouncePosition + new Vector3(0,-10,0),1f);
     }
 	
 	public void KillCube(){
@@ -89,4 +89,5 @@ public class Cube : Entity, IClickable{
             selectedCube = this;
         }
     }
+	
 }

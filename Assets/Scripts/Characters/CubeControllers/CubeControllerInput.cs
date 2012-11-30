@@ -35,7 +35,6 @@ public class CubeControllerInput : CubeController {
             selectorGameObject.transform.position = c.EndPosition;
             commands.Add(selector, c);
         }
-		Debug.Log(Cube.transform.position);
     }
 
     void OnDestroy() { 
