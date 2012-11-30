@@ -8,12 +8,8 @@ public class Cube : Entity, IClickable{
 
     public bool IsSelected
     {
-        get { return isSelected; }
+        get { return isSelected && CubeHelper.IsFree(transform.position + Vector3.up); }
         set { isSelected = value; }
-    }
-
-    protected override void Start() {
-        base.Start();
     }
 
     public virtual void MoveTo(Vector3 nextPosition) {

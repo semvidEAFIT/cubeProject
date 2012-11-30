@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CubeHelper {
     public static Vector3 GetTopPosition(Vector3 position)
@@ -56,6 +57,28 @@ public class CubeHelper {
         {
             return null;
         }
-        
+    }
+
+    public static Vector3[] GetPositionsAround(Vector3 position) {
+        List<Vector3> positionsAround = new List<Vector3>();
+        positionsAround.Add(position + Vector3.up);
+        positionsAround.Add(position + Vector3.down);
+        positionsAround.Add(position + Vector3.right);
+        positionsAround.Add(position + Vector3.left);
+        positionsAround.Add(position + Vector3.forward);
+        positionsAround.Add(position + Vector3.back);
+        return positionsAround.ToArray();
+    }
+
+    public static Entity[] GetEntitiesAround(Vector3 position) {
+        Vector3[] positionsAround = GetPositionsAround(position);
+        List<Entity> entitiesAround = new List<Entity>();
+        foreach(Vector3 v in positionsAround)
+        {
+            if (!IsFree(v)) {
+                entitiesAround.Add(GetEntityInPosition(v));
+            }
+        }
+        return entitiesAround.ToArray();
     }
 }
