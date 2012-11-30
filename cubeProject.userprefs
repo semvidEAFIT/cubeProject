@@ -1,9 +1,29 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Characters/Cubes/Industrials/RubberCube.cs">
-    <Files>
-      <File FileName="Assets/Scripts/Characters/Cubes/Industrials/RubberCube.cs" Line="1" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Characters" expanded="True">
+                  <Node name="Cubes" expanded="True" />
+                </Node>
+                <Node name="Utilities" expanded="True">
+                  <Node name="Animations" expanded="True">
+                    <Node name="CubeAnimations.cs" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
