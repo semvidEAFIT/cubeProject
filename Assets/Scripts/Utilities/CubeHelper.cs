@@ -35,7 +35,7 @@ public class CubeHelper {
     }
     public static Vector3 GetLastPositionInDirection(Vector3 position, Vector3 direction) {
 		int diff = GetDifferenceInDirection(position,direction.normalized);
-		if (diff > 0){
+		if (diff >= 0){
 			return position + (direction * (diff - 1));
 		}else{
 			throw new UnityException("No encontro cubo en esa direccion: " + direction);
@@ -81,7 +81,7 @@ public class CubeHelper {
         List<Entity> entitiesAround = new List<Entity>();
         foreach(Vector3 v in positionsAround)
         {
-            if (!IsFree(v)) {
+            if (!IsFree(v)){
                 entitiesAround.Add(GetEntityInPosition(v));
             }
         }

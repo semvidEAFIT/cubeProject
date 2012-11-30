@@ -10,6 +10,5 @@ public class Hang : Command {
     public override void Execute()
     {
         ((CloudCube)Cube).Hang(EndPosition);
-        EndExecution();
     }
 }

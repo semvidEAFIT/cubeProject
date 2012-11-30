@@ -71,6 +71,5 @@ public class CubeControllerInput : CubeController {
     public void NotifySelection(Selector selector)
     {
         AddCommand(commands[selector]);
-        UpdateSelectors();
     }
 }

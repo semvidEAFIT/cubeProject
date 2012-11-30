@@ -18,90 +18,29 @@ public class CloudCube : Cube
 		get {
 			List<Command> options = new List<Command> ();
 			if (!fix) {
-				for (int i = 0; i < 4; i ++) {
-					Vector3 direction = Vector3.zero;
-					switch (i) {
-					case 0:
-						direction = Vector3.forward;
-						break;
-					case 1:
-						direction = Vector3.forward * -1f;
-						break;
-					case 2:
-						direction = Vector3.right;
-						break;
-					case 3:
-						direction = Vector3.right * -1f;
-						break;
-					}
-					
-					
-					if( transform.position.y-2 > 0 
-						&& !CubeHelper.IsFree(new Vector3(transform.position.x+direction.x,transform.position.y-2,transform.position.z+direction.z)) 
-						&& !CubeHelper.IsFree(new Vector3(transform.position.x+direction.x,transform.position.y-1,transform.position.z+direction.z))
-						&& !CubeHelper.IsFree(new Vector3(transform.position.x+direction.x,transform.position.y,transform.position.z+direction.z))
-						){
-	            		options.Add( new Hang(this, GetNextPositionCloude(direction)));
-					}else{
-						
-						options.Add (new Move (this, GetNextPositionCloude (direction)));
-					}
-				}
-				//options.Add( new Move(this, GetNextPositionCloude(Vector3.forward)));
-				//options.Add( new Move(this, GetNextPositionCloude(Vector3.forward * -1.0f)));
-				//options.Add( new Move(this, GetNextPositionCloude(Vector3.right)));
-				//options.Add( new Move(this, GetNextPositionCloude(Vector3.right * -1.0f)));
-				
-			
-				for (int i = 0; i < options.Count; i++) {
-					
-	                if(options[i].EndPosition.y - transform.position.y > 1)
-	                {
-	                    options.RemoveAt(i);
-	                }
-	            }
-				
-				return options.ToArray ();
+                Command[] baseOptions = base.Options;
+                for (int i = 0; i < baseOptions.Length; i++ )
+                {
+                    Vector3 direction = new Vector3(baseOptions[i].EndPosition.x, this.transform.position.y, baseOptions[i].EndPosition.z) - this.transform.position;
+                    if (this.transform.position.y - baseOptions[i].EndPosition.y > 1)
+                    {
+                        Vector3 newHangPosition = new Vector3(baseOptions[i].EndPosition.x, transform.position.y - 1.0f, baseOptions[i].EndPosition.z);
+                        options.Add(new Hang(this, newHangPosition));
+                    }
+                    else 
+                    {
+                        options.Add(baseOptions[i]);
+                    }
+                }
 			}
 			
 			return options.ToArray ();
 		}
 		
 	}
-	
-	public Vector3 GetNextPositionCloude (Vector3 direction)
-	{
-		Vector3 nextPosition = transform.position + direction.normalized;
-		bool isFree = !Level.Singleton.Entities.ContainsKey (nextPosition);
-		if (!isFree) {
-			while (!isFree) {
-				nextPosition.y += 1.0f;
-				isFree = !Level.Singleton.Entities.ContainsKey (nextPosition);
-			}
-		
-		} else {
-            
-			nextPosition.y -= 1.0f;
-			if (!Level.Singleton.Entities.ContainsKey (nextPosition)) {
-				if (nextPosition.y < 0) {
-					nextPosition.y += 1;
-						
-				}
-				return nextPosition;
-					
-					
-			}
-            
-			nextPosition.y += 1.0f;
-		}
-
-		return nextPosition;
-	
-	}
 
 	public void Hang (Vector3 nextPosition)
 	{
-        Debug.Log("Yeah");
 		fix = true;
 		Level.Singleton.Entities.Remove (transform.position);
 		//transform.position = nextPosition;

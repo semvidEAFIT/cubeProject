@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Cube : Entity, IClickable{
 	
-    private bool isSelected = false;
+    protected bool isSelected = false;
     private static Cube selectedCube;
 	public Command command;
 
@@ -15,8 +15,8 @@ public class Cube : Entity, IClickable{
 			command = value;
 		}
 	}
-	
-    public bool IsSelected
+
+    public virtual bool IsSelected
     {
         get { return isSelected && CubeHelper.IsFree(transform.position + Vector3.up); }
         set { isSelected = value; }
@@ -52,10 +52,10 @@ public class Cube : Entity, IClickable{
     public virtual Command[] Options{ 
         get {
             List<Command> options = new List<Command>();
-            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position+Vector3.forward)));
-            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.forward * -1.0f)));
+            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.forward)));
+            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.back)));
             options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.right)));
-            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.right * -1.0f)));
+            options.Add(new Move(this, CubeHelper.GetTopPosition(transform.position + Vector3.left)));
 
             for (int i = 0; i < options.Count; i++ )
             {
@@ -69,9 +69,9 @@ public class Cube : Entity, IClickable{
         }
     }
 
-    public void FallOutOfBounds(Command command,Vector3 outOfBouncePosition)
+    public void FallOutOfBounds(Vector3 outOfBouncePosition)
     {
-		AnimationHelper.AnimateSlide(gameObject,outOfBouncePosition + new Vector3(0,-10,0),1f);
+		CubeAnimations.AnimateSlide(gameObject,outOfBouncePosition + new Vector3(0,-10,0), "KillCube", null);
     }
 	
 	public void KillCube(){

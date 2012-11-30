@@ -13,7 +13,11 @@ public abstract class Command {
         set { listener = value; }
     }
     
-    public void EndExecution(){
+    public virtual void EndExecution(){
+        if (endPosition.x < 0 || endPosition.x >= Level.Dimension || endPosition.z < 0 || endPosition.z >= Level.Dimension)
+        {
+            Cube.FallOutOfBounds(endPosition);
+        }
         listener.CommandFinished(this);
     }
 

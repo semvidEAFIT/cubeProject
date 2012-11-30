@@ -340,11 +340,21 @@ public class AnimationHelper : MonoBehaviour
 	/// <param name='delay'>
 	/// Total Delay. It takes into acount the delay parameter
 	/// </param>
-	public static float AnimateSlide (GameObject gameObject, Vector3 finalPosition, float delay)
+    public static float AnimateSlide(GameObject gameObject, Vector3 finalPosition, float delay, 
+        string onCompleteMethod, object parameters)
 	{
 		Vector3 direction = finalPosition - gameObject.transform.position;
 		float time = direction.magnitude * 0.2f;
 		Hashtable hs = getBasicHs (direction, time, delay, iTween.EaseType.spring);
+        if (onCompleteMethod != null && onCompleteMethod.Length > 0)
+        {
+            hs.Add("onComplete", onCompleteMethod);
+            hs.Add("onCompleteTarget", gameObject);
+            if (parameters != null)
+            {
+                hs.Add("onCompleteParams", parameters);
+            }
+        }
 		iTween.MoveAdd (gameObject, hs);
 		return delay + time;
 	}

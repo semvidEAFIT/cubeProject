@@ -8,6 +8,17 @@ public abstract class WallWalkingCube :  Cube{
 
     protected abstract bool IsDropable();
 
+    public override bool IsSelected
+    {
+        get
+        {
+            return isSelected;
+        }
+        set
+        {
+            base.IsSelected = value;
+        }
+    }
     void Awake(){
         canDrop = IsDropable();
     }
@@ -22,7 +33,7 @@ public abstract class WallWalkingCube :  Cube{
                 if (CubeHelper.IsFree(v))
                 {
                     if(HasFloorAround(v)){
-                        options.Add(new Move(this, v));
+                        options.Add(new MagneticMove(this, v));
                     }
                     else
                     {
@@ -34,16 +45,31 @@ public abstract class WallWalkingCube :  Cube{
                 }
                 else 
                 {
-                    CubeHelper.GetEntityInPosition(v);
-                    if(IsWalkable(CubeHelper.GetEntityInPosition(v))){
-                        foreach(Vector3 availablePosition in GetAvaiblePositionsRelatedTo(v)){
-                            options.Add(new Move(this, availablePosition));
-                        }           
-                    }
+                    foreach(Vector3 availablePosition in GetAvaiblePositionsRelatedTo((v - transform.position).normalized)){
+                        options.Add(new MagneticMove(this, availablePosition));
+                    }           
                 }
             }
-            Vector3 below = CubeHelper.GetTopPosition(this.transform.position);
+
+            //Remuevo los arrojes que pasan por un magneto inmediatamente
+            foreach(Command c in base.Options){
+                bool alreadyIn = false;
+                foreach(Command option in options){
+                    if (c.EndPosition.x == option.EndPosition.x && c.EndPosition.z == option.EndPosition.z)
+                    {
+                        alreadyIn = true;
+                        break;
+                    }
+                }
+                if(!alreadyIn){
+                    options.Add(c);
+                }
+            }
+            
+            Vector3 below = CubeHelper.GetLastPositionInDirection(this.transform.position, Vector3.down);
+            Debug.Log(canDrop + " " + below);
             if(canDrop && this.transform.position.y-below.y > 0){
+                Debug.Log("Yeah");
                 options.Add(new Move(this, below));
             }
             return options.ToArray();

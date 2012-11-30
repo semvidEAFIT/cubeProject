@@ -12,14 +12,8 @@ public class Mimic : Command {
 		this.direction = direction;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
 	public override void Execute ()
 	{
 		((TwinCube)Cube).Mimic(EndPosition,direction);
-		//EndExecution();
 	}
 }

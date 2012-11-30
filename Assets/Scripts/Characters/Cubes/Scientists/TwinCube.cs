@@ -70,12 +70,17 @@ public class TwinCube :Cube {
 	public void Mimic(Vector3 nextPosition, Vector3 direction) {
         Level.Singleton.Entities.Remove(transform.position);
         CubeAnimations.AnimateMove(gameObject, Vector3.down, nextPosition);
-        Level.Singleton.Entities.Add(transform.position, this);
+        Level.Singleton.Entities.Add(nextPosition, this);
        
 		Vector3 NextTwinPosition = twin.GetComponent<TwinCube>().FindNextTwinPosition(direction);
 		
 		Level.Singleton.Entities.Remove(twin.transform.position);
 		CubeAnimations.AnimateMove(twin, Vector3.down, NextTwinPosition);
 		Level.Singleton.Entities.Add(NextTwinPosition,twin.GetComponent<TwinCube>());
+
+        if (NextTwinPosition.x >= Level.Dimension || NextTwinPosition.x < 0 || NextTwinPosition.z >= Level.Dimension || NextTwinPosition.z < 0)
+        {
+            twin.GetComponent<TwinCube>().FallOutOfBounds(NextTwinPosition);
+        }
     }
 }

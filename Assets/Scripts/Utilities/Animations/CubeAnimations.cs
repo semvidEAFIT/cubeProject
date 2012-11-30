@@ -27,6 +27,15 @@ public class CubeAnimations
 	{
 		AnimationHelper.AnimateBounce (gameObject, down, nextPositions, 0f, "EndExecution", null);
 	}
-	
+
+    public static void AnimateSlide(GameObject gameObject, Vector3 nextPosition)
+    {
+        AnimationHelper.AnimateSlide(gameObject, nextPosition, 0f, "EndExecution", null);
+    }
+
+    public static void AnimateSlide(GameObject gameObject, Vector3 nextPosition, string method, string parameters)
+    {
+        AnimationHelper.AnimateSlide(gameObject, nextPosition, 0f, method, parameters);
+    }
 	#endregion
 }

@@ -20,6 +20,7 @@ public class DuplicatorCube : Cube {
 		if(duplicateTimes > 0 && CubeHelper.IsFree(transform.position + Vector3.up)){
             GameObject newClone = (GameObject) Instantiate(clone, newPosition, transform.rotation);
 		    CubeAnimations.AnimateDuplication(newClone);
+            EndExecution();
             duplicateTimes--;
         }
 	}

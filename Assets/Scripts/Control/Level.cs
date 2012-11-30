@@ -32,23 +32,6 @@ public class Level : MonoBehaviour
         }
     }
 
-    public bool IsFinished
-    {
-        get
-        {
-            bool isFinished = true;
-            foreach (Sensor s in sensors)
-            {
-                if (!s.CheckPressed())
-                {
-                    isFinished = false;
-                    break;
-                }
-            }
-            return isFinished;
-        }
-    }
-
     void Awake()
     {
         entities = new Dictionary<Vector3, Entity>(new Vector3EqualityComparer());
@@ -71,6 +54,7 @@ public class Level : MonoBehaviour
 
     public void NotifyChangePressed(Sensor s)
     {
+        Debug.Log(s);
         if (s.IsPressed)
         {
             sensors.Remove(s);
