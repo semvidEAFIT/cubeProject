@@ -2,6 +2,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Characters/Cubes/CloudCube.cs">
     <Files>
       <File FileName="Assets/Scripts/Characters/Cubes/CloudCube.cs" Line="44" Column="288" />
@@ -27,6 +28,13 @@
       <File FileName="Assets/Scripts/Characters/Commands/Launch.cs" Line="12" Column="1" />
       <File FileName="Assets/Scripts/Characters/Commands/Hang.cs" Line="1" Column="1" />
 >>>>>>> 7eb85c5a1609dcc8e2f124ad3e33fb0e07250ec8
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Characters\Cubes\Magics\LevitatorCube.cs">
+    <Files>
+      <File FileName="Assets\Scripts\Characters\Cubes\Magics\LevitatorCube.cs" Line="132" Column="31" />
+      <File FileName="Assets\Scripts\Characters\Commands\Levitate.cs" Line="18" Column="40" />
+      <File FileName="Assets\Scripts\Characters\Cubes\Cube.cs" Line="1" Column="1" />
+>>>>>>> 6fbd0ee2e4d71afc5640025f45f1789ea1a2b2f2
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

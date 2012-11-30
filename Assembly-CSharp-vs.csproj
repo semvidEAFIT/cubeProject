@@ -41,6 +41,10 @@
 	</Reference>
 	<Reference Include="UnityEditor">
 	  <HintPath>C:/Program Files (x86)/Unity4.0/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +80,7 @@
      <Compile Include="Assets\Scripts\Characters\Commands\Hang.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\CloudCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Launch.cs" />
+     <Compile Include="Assets\Scripts\Characters\Commands\Levitate.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Move.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\OutOfBounds.cs" />
      <Compile Include="Assets\Scripts\Characters\Commands\Slide.cs" />
@@ -86,6 +91,7 @@
      <Compile Include="Assets\Scripts\Characters\Cubes\Industrials\RubberCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Magics\DuplicatorCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Magics\ImitatorCube.cs" />
+     <Compile Include="Assets\Scripts\Characters\Cubes\Magics\LevitatorCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\CloudCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\IceCube.cs" />
      <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\RockCube.cs" />
@@ -96,6 +102,7 @@
      <Compile Include="Assets\Scripts\Environment\Terrains\Terrain.cs" />
      <Compile Include="Assets\Scripts\Props\Sensors\NormalPushButton.cs" />
      <Compile Include="Assets\Scripts\Props\Sensors\Sensor.cs" />
+     <Compile Include="Assets\Scripts\Utilities\AnimationHelper.cs" />
      <Compile Include="Assets\Scripts\Utilities\Camera\CameraDrive.cs" />
      <Compile Include="Assets\Scripts\Utilities\Camera\CameraLevelSelection.cs" />
      <Compile Include="Assets\Scripts\Utilities\Clicker.cs" />
@@ -103,6 +110,7 @@
      <Compile Include="Assets\Scripts\Utilities\IClickable.cs" />
      <Compile Include="Assets\Scripts\Utilities\Selector.cs" />
      <Compile Include="Assets\Scripts\Utilities\Vector3EqualityComparer.cs" />
+     <Compile Include="Assets\Scripts\Utilities\iTween\Plugins\iTween.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
