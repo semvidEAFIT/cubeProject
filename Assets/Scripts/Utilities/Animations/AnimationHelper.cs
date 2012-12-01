@@ -72,7 +72,6 @@ public class AnimationHelper : MonoBehaviour
 	public static void AnimateBounce (GameObject gameObject, Vector3 down, Vector3[] nextPositions, float delay, 
 		string onCompleteMethod, object parameters)
 	{
-		
 		AnimationHelper.actualPosition = 0;
 		AnimationHelper.nextPositions = nextPositions;
 		AnimationHelper.bounceDelay = delay;
@@ -89,12 +88,11 @@ public class AnimationHelper : MonoBehaviour
 	/// </summary>
 	public void AnimateBouncePositions ()
 	{
-		
 		actualPosition++;
 		if (actualPosition < nextPositions.Length - 1) {// The last last position should make the recursive call
-			AnimateJump2 (bounceObject, down, nextPositions [actualPosition], bounceDelay, "AnimateBouncePositions", parameters);
+			AnimateJump (bounceObject, down, nextPositions [actualPosition], bounceDelay, "AnimateBouncePositions", parameters);
 		} else {// This is the last movement
-			AnimateJump2 (bounceObject, down, nextPositions [actualPosition], bounceDelay, onCompleteMethod, parameters);
+			AnimateJump (bounceObject, down, nextPositions [actualPosition], bounceDelay, onCompleteMethod, parameters);
 		}
 		
 	}

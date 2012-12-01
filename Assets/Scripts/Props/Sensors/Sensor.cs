@@ -10,7 +10,7 @@ public abstract class Sensor : Terrain {
     }
     public abstract bool CheckPressed();
 
-    void Update() { 
+    protected virtual void Update() { 
         if(CheckPressed() != isPressed){
             isPressed = CheckPressed();
             Level.Singleton.NotifyChangePressed(this);

@@ -21,7 +21,11 @@ public class GameController : MonoBehaviour {
             }
         }
     }
-
+	
+	public void LoadScene(string sceneName){
+		Application.LoadLevel(sceneName);
+	}
+		
     void Awake() {
         singleton = this;
         DontDestroyOnLoad(this.gameObject);

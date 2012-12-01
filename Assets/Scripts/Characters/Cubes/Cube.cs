@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 public class Cube : Entity, IClickable{
 	
+	private string[] sounds = new string[]{
+		"Sounds/Effects/Characters/Bloque 1",
+		"Sounds/Effects/Characters/Bloque 2",
+		"Sounds/Effects/Characters/Bloque 3",
+		"Sounds/Effects/Characters/Bloque 4",
+		"Sounds/Effects/Characters/Bloque 5"
+	};
+	
     protected bool isSelected = false;
     private static Cube selectedCube;
 	public Command command;
@@ -15,7 +23,7 @@ public class Cube : Entity, IClickable{
 			command = value;
 		}
 	}
-
+	
     public virtual bool IsSelected
     {
         get { return isSelected && CubeHelper.IsFree(transform.position + Vector3.up); }
@@ -33,6 +41,9 @@ public class Cube : Entity, IClickable{
 		if(command != null){
 			command.EndExecution();
 		}
+		AudioSource ac = GetComponent<AudioSource>();
+		ac.clip = Resources.Load(sounds[Random.Range(0,sounds.Length -1)]) as AudioClip;
+		ac.Play();
 	}
 	
 	private Vector3 Vector3Round(Vector3 v){
