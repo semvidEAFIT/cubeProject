@@ -7,7 +7,17 @@ public class Level : MonoBehaviour
 {
     private Dictionary<Vector3, Entity> entities;
     private static int dimension = 10;
+<<<<<<< HEAD
     public Rect restartButton;
+=======
+    public Rect restartButton = new Rect(0,0, Screen.width*0.1f, Screen.height *0.1f);
+	private string[] music = new string[] {
+		"Sounds/Music/Cientifico",
+		"Sounds/Music/Clan Magico",
+		"Sounds/Music/Clan Natural"
+	};
+	
+>>>>>>> 85a84d3e3b053cdcfb474fbbc7bfd9d0aaab4abb
 
     public static int Dimension
     {
@@ -39,6 +49,15 @@ public class Level : MonoBehaviour
         entities = new Dictionary<Vector3, Entity>(new Vector3EqualityComparer());
         sensors = new ArrayList();
     }
+	
+	void Start(){
+		GameObject obj = new GameObject("Sound Manager");
+		obj.AddComponent<AudioSource>();
+		AudioSource ac = obj.GetComponent<AudioSource>();
+		AudioClip sound1 =  Resources.Load(music[UnityEngine.Random.Range(0,music.Length-1)]) as AudioClip;
+		ac.clip = sound1;
+	 	ac.Play();
+	}
 
     void OnDestroy()
     {
@@ -54,10 +73,17 @@ public class Level : MonoBehaviour
             {
                 sensors.Add(e);
             }
+<<<<<<< HEAD
         }
         catch (Exception ex) { 
             //Machetazo!
         }
+=======
+        }
+        catch (Exception ex) { 
+            //Machetazo!
+        }
+>>>>>>> 85a84d3e3b053cdcfb474fbbc7bfd9d0aaab4abb
 		
     }
 
@@ -68,7 +94,9 @@ public class Level : MonoBehaviour
         {
             sensors.Remove(s);
             if(sensors.Count == 0){
-                GameController.Singleton.NotifyEndLevel(Application.loadedLevelName);
+                //GameController.Singleton.NotifyEndLevel(Application.loadedLevelName);
+				
+				Application.LoadLevel(UnityEngine.Random.Range(1,Application.levelCount-1));
             }
         }
         else

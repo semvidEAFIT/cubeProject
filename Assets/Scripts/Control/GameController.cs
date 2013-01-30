@@ -30,7 +30,11 @@ public class GameController : MonoBehaviour {
             return singleton;
         }
     }
-
+	
+	public void LoadScene(string sceneName){
+		Application.LoadLevel(sceneName);
+	}
+		
     void Awake() {
         string load = defaultlevels;
         /*

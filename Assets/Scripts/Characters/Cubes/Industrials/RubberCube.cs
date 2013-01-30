@@ -50,7 +50,10 @@ public class RubberCube : Cube {
 					commands.Add(new Bounce(this,jumpPosition,jumpPositions));
 				}else{
 					int jumpSizeNext = CubeHelper.GetDifferenceInDirection(currentPosition + direction,Vector3.down) - 1;
+<<<<<<< HEAD
 					print ("jp" + jumpSize + "," + jumpSizeNext);
+=======
+>>>>>>> 85a84d3e3b053cdcfb474fbbc7bfd9d0aaab4abb
 					if (jumpSizeNext < jumpSize){
 						commands.Add(new Bounce(this,currentPosition + direction + (Vector3.down * jumpSizeNext),jumpPositions));
 					}else{
@@ -67,12 +70,20 @@ public class RubberCube : Cube {
 		Vector3 nextPosition = currentPosition + direction;
 		if (Level.Singleton.Entities.ContainsKey(nextPosition + Vector3.down)){
 			// exite piso osea que salte por ultima vez
-			commands.Add(new Bounce(this,nextPosition,jumpPositions));
+			if (!Level.Singleton.Entities.ContainsKey(nextPosition)){
+				commands.Add(new Bounce(this,nextPosition,jumpPositions));
+			}else if (!Level.Singleton.Entities.ContainsKey(nextPosition + Vector3.up)){
+				commands.Add(new Bounce(this,nextPosition + Vector3.up,jumpPositions));
+			}
 		}else{
 			// Sigue la recursividad
 			int jumpSize = CubeHelper.GetDifferenceInDirection(nextPosition,Vector3.down) - 1;
 			if (jumpSize >= 0){
 				Vector3 jumpPosition = nextPosition + Vector3.down *jumpSize ; // changed multiply
+<<<<<<< HEAD
+=======
+				
+>>>>>>> 85a84d3e3b053cdcfb474fbbc7bfd9d0aaab4abb
 				jumpPositions.Add(jumpPosition);
 				JumpRecursive(jumpPosition,commands,jumpPositions,direction);
 			}
