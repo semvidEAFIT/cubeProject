@@ -77,6 +77,7 @@
      <Compile Include="Assets\Scripts\Environment\Terrains\Terrain.cs" />
      <Compile Include="Assets\Scripts\Props\Sensors\DigitalSensor.cs" />
      <Compile Include="Assets\Scripts\Props\Sensors\LaserSensor.cs" />
+     <Compile Include="Assets\Scripts\Props\Sensors\MenuButton.cs" />
      <Compile Include="Assets\Scripts\Props\Sensors\NormalPushButton.cs" />
      <Compile Include="Assets\Scripts\Props\Sensors\Sensor.cs" />
      <Compile Include="Assets\Scripts\Utilities\Animations\AnimationHelper.cs" />

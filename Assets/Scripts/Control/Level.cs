@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 public class Level : MonoBehaviour
 {
     private Dictionary<Vector3, Entity> entities;
     private static int dimension = 10;
+    public Rect restartButton;
 
     public static int Dimension
     {
@@ -45,11 +47,18 @@ public class Level : MonoBehaviour
 
     public void AddEntity(Entity e, Vector3 position)
     {
-        entities.Add(position, e);
-        if (e is Sensor)
+        try
         {
-            sensors.Add(e);
+            entities.Add(position, e);
+            if (e is Sensor)
+            {
+                sensors.Add(e);
+            }
         }
+        catch (Exception ex) { 
+            //Machetazo!
+        }
+		
     }
 
     public void NotifyChangePressed(Sensor s)
@@ -67,6 +76,12 @@ public class Level : MonoBehaviour
             if(!sensors.Contains(s)){
                 sensors.Add(s);
             }
+        }
+    }
+
+    void OnGUI() { 
+        if(GUI.Button(restartButton, "Restart")){
+            Application.LoadLevel(Application.loadedLevelName);    
         }
     }
 	

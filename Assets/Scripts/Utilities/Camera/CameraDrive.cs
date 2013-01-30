@@ -12,7 +12,6 @@ public class CameraDrive : MonoBehaviour {
 	protected virtual void Start () {
 		cubep=cube.transform.position;
 		cubep.Set(cubep.x,cubep.y+5,cubep.z);
-		error=-5;
 	}
 	
 	

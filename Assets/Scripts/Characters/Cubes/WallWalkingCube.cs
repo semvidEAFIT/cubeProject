@@ -27,13 +27,15 @@ public abstract class WallWalkingCube :  Cube{
     {
         get
         {
+            Debug.Log(CubeHelper.IsFree(transform.position + Vector3.up));
             List<Command> options = new List<Command>();
             Vector3[] posiblePositions = CubeHelper.GetPositionsAround(this.transform.position);
             foreach(Vector3 v in posiblePositions){
                 if (CubeHelper.IsFree(v))
                 {
-                    if(HasFloorAround(v)){
-                        options.Add(new MagneticMove(this, v));
+                    Vector3 floorDirection = HasFloorAround(v);
+                    if(floorDirection != Vector3.zero){
+                        options.Add(new MagneticMove(this, v, floorDirection));
                     }
                     else
                     {
@@ -46,7 +48,7 @@ public abstract class WallWalkingCube :  Cube{
                 else 
                 {
                     foreach(Vector3 availablePosition in GetAvaiblePositionsRelatedTo((v - transform.position).normalized)){
-                        options.Add(new MagneticMove(this, availablePosition));
+                        options.Add(new MagneticMove(this, availablePosition, (availablePosition - v).normalized));
                     }           
                 }
             }
@@ -65,11 +67,9 @@ public abstract class WallWalkingCube :  Cube{
                     options.Add(c);
                 }
             }
-            
+
             Vector3 below = CubeHelper.GetLastPositionInDirection(this.transform.position, Vector3.down);
-            Debug.Log(canDrop + " " + below);
             if(canDrop && this.transform.position.y-below.y > 0){
-                Debug.Log("Yeah");
                 options.Add(new Move(this, below));
             }
             return options.ToArray();
@@ -120,13 +120,20 @@ public abstract class WallWalkingCube :  Cube{
         return availablePositions.ToArray();
     }
 
-    private bool HasFloorAround(Vector3 v) {
+    private Vector3 HasFloorAround(Vector3 v) {
         Entity[] around = CubeHelper.GetEntitiesAround(v);
         foreach(Entity e in around){
-            if(IsWalkable(e)){
-                return true;
+            if(e.transform.position!= this.transform.position && IsWalkable(e)){
+                return (e.transform.position - this.transform.position).normalized;
             }
         }
-        return false;
+        return Vector3.zero;
+    }
+
+    public void MagneticMoveTo(Vector3 nextPosition, Vector3 floorDirection)
+    {
+        Level.Singleton.Entities.Remove(transform.position);
+        CubeAnimations.AnimateMove(gameObject, floorDirection, nextPosition);
+        Level.Singleton.Entities.Add(nextPosition, this);
     }
 }
