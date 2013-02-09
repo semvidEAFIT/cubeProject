@@ -132,8 +132,8 @@ public abstract class WallWalkingCube :  Cube{
 
     public void MagneticMoveTo(Vector3 nextPosition, Vector3 floorDirection)
     {
-        Level.Singleton.Entities.Remove(transform.position);
+        Level.Singleton.RemoveEntity(transform.position);
         CubeAnimations.AnimateMove(gameObject, floorDirection, nextPosition);
-        Level.Singleton.Entities.Add(nextPosition, this);
+        Level.Singleton.AddEntity(nextPosition,this);
     }
 }

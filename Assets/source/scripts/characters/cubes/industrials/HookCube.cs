@@ -41,9 +41,9 @@ public class HookCube : Cube {
 	}
 	
 	public void Launch(Vector3 nextPosition){
-		Level.Singleton.Entities.Remove(transform.position);
+		Level.Singleton.RemoveEntity(transform.position);
         transform.position = nextPosition;
-        Level.Singleton.Entities.Add(transform.position, this);
+        Level.Singleton.AddEntity(nextPosition, this);
 			
 	}
 	

@@ -17,7 +17,7 @@ public class LevitatorCube : Cube {
 	
 	public override Command[] Options {
 		get {
-			if(!Level.Singleton.Entities.ContainsKey(transform.position + (Vector3.down)))
+			if(!Level.Singleton.ContainsElement(transform.position + (Vector3.down)))
 			{
 				isLevitating = true;
 			}
@@ -78,19 +78,19 @@ public class LevitatorCube : Cube {
 	public Vector3 GetTopPosition (Vector3 direction)
 	{
 		Vector3 nextPosition = transform.position + direction.normalized;
-        bool isFree = !Level.Singleton.Entities.ContainsKey(nextPosition);
+        bool isFree = !Level.Singleton.ContainsElement(nextPosition);
         if (!isFree)
         {
             while (!isFree && !isLevitating) {
                 nextPosition.y += 1.0f;
-                isFree = !Level.Singleton.Entities.ContainsKey(nextPosition);
+                isFree = !Level.Singleton.ContainsElement(nextPosition);
             }
         }
         else
         {
             while (isFree) {
                 nextPosition.y -= 1.0f;
-                isFree = !Level.Singleton.Entities.ContainsKey(nextPosition);
+                isFree = !Level.Singleton.ContainsElement(nextPosition);
                 if(nextPosition.y < 0){
                     break;
                 }
@@ -104,14 +104,14 @@ public class LevitatorCube : Cube {
 	{
 		Vector3 nextPosition = position + direction;
 		
-		return !Level.Singleton.Entities.ContainsKey(nextPosition) 
-			&& !Level.Singleton.Entities.ContainsKey(nextPosition + (Vector3.up * -1f));
+		return !Level.Singleton.ContainsElement(nextPosition) 
+			&& !Level.Singleton.ContainsElement(nextPosition + (Vector3.up * -1f));
 	}
 	
 	public void Levitate(Vector3 nextPosition)
 	{
-		Level.Singleton.Entities.Remove(transform.position);
+		Level.Singleton.RemoveEntity(transform.position);
 		AnimationHelper.AnimateJump2(gameObject,Vector3.down,nextPosition,0f,"EndExecution",null);
-        Level.Singleton.Entities.Add(nextPosition, this);
+        Level.Singleton.AddEntity(nextPosition, this);
 	}
 }

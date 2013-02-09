@@ -5,7 +5,7 @@ using System;
 
 public class Level : MonoBehaviour
 {
-    private Dictionary<Vector3, Entity> entities;
+    private Dictionary<Vector3Int, Entity> entities;
     private static int dimension = 10;
 
     public Rect restartButton = new Rect(0,0, Screen.width*0.1f, Screen.height *0.1f);
@@ -15,17 +15,34 @@ public class Level : MonoBehaviour
 		"Sounds/Music/Clan Natural"
 	};
 	
-
     public static int Dimension
     {
         get { return Level.dimension; }
     }
 
-    public Dictionary<Vector3, Entity> Entities
+    public Dictionary<Vector3Int, Entity> Entities
     {
         get {return entities; }
     }
-
+	
+	#region Dictionary Management
+	public void AddEntity(Vector3 position, Entity entity){
+		entities.Add(Vector3Int.getVector(position),entity);
+	}
+	
+	public void RemoveEntity(Vector3 position){
+		entities.Remove(Vector3Int.getVector(position));
+	}
+	
+	public Entity getEntity(Vector3 position){
+		return entities[Vector3Int.getVector(position)];
+	}
+	
+	public bool ContainsElement(Vector3 position){
+		return entities.ContainsKey(Vector3Int.getVector(position));
+	}
+	#endregion
+	
     private ArrayList sensors;
     private static Level singleton;
 
@@ -43,7 +60,7 @@ public class Level : MonoBehaviour
 
     void Awake()
     {
-        entities = new Dictionary<Vector3, Entity>(new Vector3EqualityComparer());
+        entities = new Dictionary<Vector3Int, Entity>(new Vector3EqualityComparer());
         sensors = new ArrayList();
     }
 	
@@ -63,9 +80,10 @@ public class Level : MonoBehaviour
 
     public void AddEntity(Entity e, Vector3 position)
     {
+		
         try
         {
-            entities.Add(position, e);
+            entities.Add(Vector3Int.getVector(position), e);
             if (e is Sensor)
             {
                 sensors.Add(e);

@@ -25,7 +25,7 @@ public class ImitatorCube : Cube {
     }
     void Update() {
         Vector3EqualityComparer comparer = new Vector3EqualityComparer();
-        if (isClone && comparer.Equals(transform.position, imitated.transform.position)) {
+        if (isClone && Vector3.Equals(transform.position,imitated.transform.position)) {
             if (CubeHelper.GetEntityInPosition(imitated.transform.position + Vector3.down) is Cube)
             {
                 Clone(CubeHelper.GetEntityInPosition(imitated.transform.position + Vector3.down));
@@ -69,11 +69,11 @@ public class ImitatorCube : Cube {
     private void Clone(Entity e) {
         if(isClone){
             this.transform.position = imitated.transform.position;
-            Level.Singleton.Entities.Remove(this.transform.position);
+            Level.Singleton.RemoveEntity(this.transform.position);
             Destroy(imitated);
         }
 
-        Level.Singleton.Entities.Remove(this.transform.position);
+        Level.Singleton.RemoveEntity(this.transform.position);
         
         isClone = true;
         switch(e.name){

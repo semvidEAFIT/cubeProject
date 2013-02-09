@@ -42,9 +42,9 @@ public class CloudCube : Cube
 	public void Hang (Vector3 nextPosition)
 	{
 		fix = true;
-		Level.Singleton.Entities.Remove (transform.position);
+		Level.Singleton.RemoveEntity (transform.position);
 		//transform.position = nextPosition;
 		AnimationHelper.AnimateJump2 (gameObject, Vector3.down, nextPosition, 0f, "EndExecution", null);
-		Level.Singleton.Entities.Add (nextPosition, this);
+		Level.Singleton.AddEntity (nextPosition, this);
 	}
 }

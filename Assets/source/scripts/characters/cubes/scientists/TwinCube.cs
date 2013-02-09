@@ -18,7 +18,7 @@ public class TwinCube :Cube {
 	
 	public void OnDestroy(){
 		if(twin!=null){
-			Level.Singleton.Entities.Remove(twin.transform.position);
+			Level.Singleton.RemoveEntity(twin.transform.position);
 			Instantiate(replacement,twin.transform.position,Quaternion.identity);
 			Destroy(twin);
 		}
@@ -68,15 +68,15 @@ public class TwinCube :Cube {
 	}
 	
 	public void Mimic(Vector3 nextPosition, Vector3 direction) {
-        Level.Singleton.Entities.Remove(transform.position);
+        Level.Singleton.RemoveEntity(transform.position);
         CubeAnimations.AnimateMove(gameObject, Vector3.down, nextPosition);
-        Level.Singleton.Entities.Add(nextPosition, this);
+        Level.Singleton.AddEntity(nextPosition, this);
        
 		Vector3 NextTwinPosition = twin.GetComponent<TwinCube>().FindNextTwinPosition(direction);
 		
-		Level.Singleton.Entities.Remove(twin.transform.position);
+		Level.Singleton.RemoveEntity(twin.transform.position);
 		CubeAnimations.AnimateMove(twin, Vector3.down, NextTwinPosition);
-		Level.Singleton.Entities.Add(NextTwinPosition,twin.GetComponent<TwinCube>());
+		Level.Singleton.AddEntity(NextTwinPosition,twin.GetComponent<TwinCube>());
 
         if (NextTwinPosition.x >= Level.Dimension || NextTwinPosition.x < 0 || NextTwinPosition.z >= Level.Dimension || NextTwinPosition.z < 0)
         {

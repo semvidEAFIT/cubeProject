@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class CubeHelper {
     public static Vector3 GetTopPosition(Vector3 position)
     {
-        bool isFree = !Level.Singleton.Entities.ContainsKey(position);
+        bool isFree = !Level.Singleton.ContainsElement(position);
         if (!isFree)
         {
             while (!isFree)
             {
                 position.y += 1.0f;
-                isFree = !Level.Singleton.Entities.ContainsKey(position);
+                isFree = !Level.Singleton.ContainsElement(position);
             }
         }
         else
@@ -19,7 +19,7 @@ public class CubeHelper {
             while (isFree)
             {
                 position.y -= 1.0f;
-                isFree = !Level.Singleton.Entities.ContainsKey(position);
+                isFree = !Level.Singleton.ContainsElement(position);
                 if (position.y < 0)
                 {
                     break;
@@ -31,7 +31,7 @@ public class CubeHelper {
         return position;
     }
     public static bool IsFree(Vector3 position) {
-        return !Level.Singleton.Entities.ContainsKey(position);
+        return !Level.Singleton.ContainsElement(position);
     }
     public static Vector3 GetLastPositionInDirection(Vector3 position, Vector3 direction) {
 		int diff = GetDifferenceInDirection(position,direction.normalized);
@@ -55,9 +55,9 @@ public class CubeHelper {
 //        return position;
     }
     public static Entity GetEntityInPosition(Vector3 position) {
-        if(Level.Singleton.Entities.ContainsKey(position))
+        if(Level.Singleton.ContainsElement(position))
         {
-            return Level.Singleton.Entities[position];
+            return Level.Singleton.getEntity(position);
         }
         else
         {
@@ -96,10 +96,11 @@ public class CubeHelper {
 		Vector3 columnPosition =  VectorHelper.Multiply(position,valueFinder);
 		Vector3 valueGetter = VectorHelper.Abs(direction);
 		float min = -1;
-		foreach (Vector3 key in Level.Singleton.Entities.Keys){
-			if ( !VectorHelper.Eq(position,key)
-				&&  VectorHelper.Eq(VectorHelper.Multiply(key, valueFinder),columnPosition)){
-				Vector3 directionTemp = key - position;
+		foreach (Vector3Int key in Level.Singleton.Entities.Keys){
+			Vector3 keyV = key.PositionFloats;
+			if ( !(position == keyV)
+				&&  VectorHelper.Eq(VectorHelper.Multiply(keyV, valueFinder),columnPosition)){
+				Vector3 directionTemp = keyV - position;
 				float diff = Vector3.Dot( direction, directionTemp);
 				if (diff > 0 ){
 					if (min == -1){

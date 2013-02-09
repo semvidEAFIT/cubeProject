@@ -30,14 +30,14 @@ public class RubberCube : Cube {
 	
 	private void SideOptions(List<Command> commands, Vector3 direction){
 		Vector3 currentPosition = transform.position + direction;
-		if (Level.Singleton.Entities.ContainsKey(currentPosition)){
-			Entity entity = Level.Singleton.Entities[currentPosition];
+		if (Level.Singleton.ContainsElement(currentPosition)){
+			Entity entity = Level.Singleton.getEntity(currentPosition);
 			// Check if cubes exists on top of me
-			if (!Level.Singleton.Entities.ContainsKey(currentPosition + Vector3.up)){
+			if (!Level.Singleton.ContainsElement(currentPosition + Vector3.up)){
 				commands.Add(new Move(this,currentPosition + Vector3.up));
 			}
 		}else{
-			if (Level.Singleton.Entities.ContainsKey(currentPosition + Vector3.down)){
+			if (Level.Singleton.ContainsElement(currentPosition + Vector3.down)){
 				commands.Add(new Move(this,currentPosition));
 			}else{
 				int jumpSize = CubeHelper.GetDifferenceInDirection(currentPosition,Vector3.down) - 1;
@@ -45,7 +45,7 @@ public class RubberCube : Cube {
 				List<Vector3> jumpPositions = new List<Vector3>();
 				jumpPositions.Add(jumpPosition);
 				
-				if (Level.Singleton.Entities.ContainsKey(currentPosition + direction)){
+				if (Level.Singleton.ContainsElement(currentPosition + direction)){
 					//Cae en el mismo lugar donde salto por su primera vez
 					commands.Add(new Bounce(this,jumpPosition,jumpPositions));
 				}else{
@@ -67,11 +67,11 @@ public class RubberCube : Cube {
 	private void JumpRecursive(Vector3 currentPosition, List<Command> commands, List<Vector3> jumpPositions, Vector3 direction)
 	{
 		Vector3 nextPosition = currentPosition + direction;
-		if (Level.Singleton.Entities.ContainsKey(nextPosition + Vector3.down)){
+		if (Level.Singleton.ContainsElement(nextPosition + Vector3.down)){
 			// exite piso osea que salte por ultima vez
-			if (!Level.Singleton.Entities.ContainsKey(nextPosition)){
+			if (!Level.Singleton.ContainsElement(nextPosition)){
 				commands.Add(new Bounce(this,nextPosition,jumpPositions));
-			}else if (!Level.Singleton.Entities.ContainsKey(nextPosition + Vector3.up)){
+			}else if (!Level.Singleton.ContainsElement(nextPosition + Vector3.up)){
 				commands.Add(new Bounce(this,nextPosition + Vector3.up,jumpPositions));
 			}
 		}else{
@@ -87,7 +87,7 @@ public class RubberCube : Cube {
 	}
 	
 	public void Bounce(Vector3 endPosition, List<Vector3> bouncePositions){
-		Level.Singleton.Entities.Remove(transform.position);
+		Level.Singleton.RemoveEntity(transform.position);
 		bouncePositions.Add(endPosition);
 		Vector3[] positions = new Vector3[bouncePositions.Count];
 		for (int i = 0 ; i < bouncePositions.Count ; i++){
@@ -95,13 +95,13 @@ public class RubberCube : Cube {
 			positions[i] = bouncePositions[i];
 		}
 		CubeAnimations.AnimateBounce(gameObject,Vector3.down,positions);
-        Level.Singleton.Entities.Add(endPosition, this);
+        Level.Singleton.AddEntity(endPosition, this);
 	}
 	
 	public  void Bounce(Vector3 nextPosition) {
-        Level.Singleton.Entities.Remove(transform.position);
+        Level.Singleton.RemoveEntity(transform.position);
         transform.position = nextPosition;
-        Level.Singleton.Entities.Add(transform.position, this);
+        Level.Singleton.AddEntity(transform.position, this);
     }
 	
 }

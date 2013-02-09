@@ -33,9 +33,9 @@ public class IceCube : Cube {
 	}
 	
 	public void Slide(Vector3 endPosition, Vector3 direction){
-        Level.Singleton.Entities.Remove(transform.position);
+        Level.Singleton.RemoveEntity(transform.position);
         CubeAnimations.AnimateSlide(gameObject, endPosition);//"SlideEndExecution", new float[] { direction.x, direction.y, direction.z }
-        Level.Singleton.Entities.Add(endPosition, this);
+        Level.Singleton.AddEntity(endPosition, this);
 	}
 
     public void Break() {
