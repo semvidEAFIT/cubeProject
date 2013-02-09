@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_0;UNITY_4_0;UNITY_STANDALONE_WIN;UNITY_64;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_0;UNITY_4_0;UNITY_STANDALONE_WIN;ENABLE_PROFILER;UNITY_EDITOR</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -37,63 +37,63 @@
     <Reference Include="System.XML" />
 	<Reference Include="System.Core" />
 	<Reference Include="UnityEngine">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity4.0/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity4.0/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Pixelplacement\iTweenPath\iTweenPath.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Bounce.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Command.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Duplicate.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Hang.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Launch.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Levitate.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\MagneticMove.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Mimic.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Move.cs" />
-     <Compile Include="Assets\Scripts\Characters\Commands\Slide.cs" />
-     <Compile Include="Assets\Scripts\Characters\CubeControllers\CubeController.cs" />
-     <Compile Include="Assets\Scripts\Characters\CubeControllers\CubeControllerInput.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Cube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Industrials\HookCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Industrials\MetalCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Industrials\RubberCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Magics\DuplicatorCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Magics\ImitatorCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Magics\LevitatorCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\CloudCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\IceCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Naturals\RockCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Scientists\DigitalCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Scientists\LaserCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\Scientists\TwinCube.cs" />
-     <Compile Include="Assets\Scripts\Characters\Cubes\WallWalkingCube.cs" />
-     <Compile Include="Assets\Scripts\Control\Entity.cs" />
-     <Compile Include="Assets\Scripts\Control\GameController.cs" />
-     <Compile Include="Assets\Scripts\Control\Level.cs" />
-     <Compile Include="Assets\Scripts\Environment\Credits.cs" />
-     <Compile Include="Assets\Scripts\Environment\Terrains\Terrain.cs" />
-     <Compile Include="Assets\Scripts\Props\Sensors\DigitalSensor.cs" />
-     <Compile Include="Assets\Scripts\Props\Sensors\LaserSensor.cs" />
-     <Compile Include="Assets\Scripts\Props\Sensors\MenuButton.cs" />
-     <Compile Include="Assets\Scripts\Props\Sensors\NormalPushButton.cs" />
-     <Compile Include="Assets\Scripts\Props\Sensors\Sensor.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Animations\AnimationHelper.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Animations\CubeAnimations.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Camera\CameraDrive.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Camera\CameraLevelSelection.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Clicker.cs" />
-     <Compile Include="Assets\Scripts\Utilities\CubeHelper.cs" />
-     <Compile Include="Assets\Scripts\Utilities\IClickable.cs" />
-     <Compile Include="Assets\Scripts\Utilities\ILaserReactive.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Selector.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Sprite.cs" />
-     <Compile Include="Assets\Scripts\Utilities\Vector3EqualityComparer.cs" />
-     <Compile Include="Assets\Scripts\Utilities\VectorHelper.cs" />
-     <Compile Include="Assets\Scripts\Utilities\iTween\Plugins\iTween.cs" />
+     <Compile Include="Assets\source\lib\iTween\Plugins\iTween.cs" />
+     <Compile Include="Assets\source\lib\iTweenPath\iTweenPath.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\Bounce.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\Command.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\Duplicate.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\Hang.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\Launch.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\Levitate.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\MagneticMove.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\Mimic.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\Move.cs" />
+     <Compile Include="Assets\source\scripts\characters\commands\Slide.cs" />
+     <Compile Include="Assets\source\scripts\characters\cube controllers\CubeController.cs" />
+     <Compile Include="Assets\source\scripts\characters\cube controllers\CubeControllerInput.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\Cube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\WallWalkingCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\industrials\HookCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\industrials\MetalCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\industrials\RubberCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\magics\DuplicatorCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\magics\ImitatorCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\magics\LevitatorCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\naturals\CloudCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\naturals\IceCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\naturals\RockCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\scientists\DigitalCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\scientists\LaserCube.cs" />
+     <Compile Include="Assets\source\scripts\characters\cubes\scientists\TwinCube.cs" />
+     <Compile Include="Assets\source\scripts\control\Entity.cs" />
+     <Compile Include="Assets\source\scripts\control\GameController.cs" />
+     <Compile Include="Assets\source\scripts\control\Level.cs" />
+     <Compile Include="Assets\source\scripts\extras\Credits.cs" />
+     <Compile Include="Assets\source\scripts\helpers\Clicker.cs" />
+     <Compile Include="Assets\source\scripts\helpers\CubeHelper.cs" />
+     <Compile Include="Assets\source\scripts\helpers\IClickable.cs" />
+     <Compile Include="Assets\source\scripts\helpers\ILaserReactive.cs" />
+     <Compile Include="Assets\source\scripts\helpers\Selector.cs" />
+     <Compile Include="Assets\source\scripts\helpers\Sprite.cs" />
+     <Compile Include="Assets\source\scripts\helpers\Vector3EqualityComparer.cs" />
+     <Compile Include="Assets\source\scripts\helpers\VectorHelper.cs" />
+     <Compile Include="Assets\source\scripts\helpers\animations\AnimationHelper.cs" />
+     <Compile Include="Assets\source\scripts\helpers\animations\CubeAnimations.cs" />
+     <Compile Include="Assets\source\scripts\helpers\camera\CameraDrive.cs" />
+     <Compile Include="Assets\source\scripts\helpers\camera\CameraLevelSelection.cs" />
+     <Compile Include="Assets\source\scripts\props\sensors\DigitalSensor.cs" />
+     <Compile Include="Assets\source\scripts\props\sensors\LaserSensor.cs" />
+     <Compile Include="Assets\source\scripts\props\sensors\MenuButton.cs" />
+     <Compile Include="Assets\source\scripts\props\sensors\NormalPushButton.cs" />
+     <Compile Include="Assets\source\scripts\props\sensors\Sensor.cs" />
+     <Compile Include="Assets\source\scripts\props\terrains\Terrain.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
