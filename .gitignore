@@ -18,7 +18,8 @@ Temp
 *.pidb  
 *.userprefs  
 *.user  
-*.suo  
+*.suo
+*.meta  
    
 #OS Junk  
 Thumbs.db  

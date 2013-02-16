@@ -75,6 +75,7 @@
      <Compile Include="Assets\source\scripts\control\Entity.cs" />
      <Compile Include="Assets\source\scripts\control\GameController.cs" />
      <Compile Include="Assets\source\scripts\control\Level.cs" />
+     <Compile Include="Assets\source\scripts\educational\CommandManager.cs" />
      <Compile Include="Assets\source\scripts\extras\Credits.cs" />
      <Compile Include="Assets\source\scripts\helpers\Clicker.cs" />
      <Compile Include="Assets\source\scripts\helpers\CubeHelper.cs" />
