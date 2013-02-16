@@ -1,19 +1,36 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\source\scripts\educational\CommandManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\source\scripts\control\Entity.cs">
     <Files>
-      <File FileName="Assets\source\scripts\characters\cubes\Cube.cs" Line="3" Column="1" />
+      <File FileName="Assets\source\scripts\educational\CommandManager.cs" Line="1" Column="1" />
       <File FileName="Assets\source\scripts\characters\cubes\scientists\TwinCube.cs" Line="71" Column="9" />
-      <File FileName="Assets\source\scripts\control\Entity.cs" Line="1" Column="1" />
-      <File FileName="Assets\source\scripts\educational\CommandManager.cs" Line="6" Column="2" />
-      <File FileName="Assets\source\scripts\characters\commands\Command.cs" Line="4" Column="26" />
+      <File FileName="Assets\source\scripts\characters\commands\Command.cs" Line="1" Column="1" />
       <File FileName="Assets\source\scripts\helpers\IClickable.cs" Line="1" Column="1" />
       <File FileName="Assets\source\scripts\characters\commands\Move.cs" Line="1" Column="1" />
       <File FileName="Assets\source\scripts\helpers\Selector.cs" Line="1" Column="1" />
+      <File FileName="Assets\source\scripts\control\Entity.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="source" expanded="True">
+                <Node name="scripts" expanded="True">
+                  <Node name="characters" expanded="True">
+                    <Node name="cubes" expanded="True">
+                      <Node name="scientists" expanded="True" />
+                    </Node>
+                  </Node>
+                  <Node name="control" expanded="True">
+                    <Node name="Entity.cs" selected="True" />
+                  </Node>
+                  <Node name="educational" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
