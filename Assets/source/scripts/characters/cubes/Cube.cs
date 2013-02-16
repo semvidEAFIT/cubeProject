@@ -3,62 +3,32 @@ using System.Collections.Generic;
 
 public class Cube : Entity, IClickable{
 	
-	private string[] sounds = new string[]{
-		"Sounds/Effects/Characters/Bloque 1",
-		"Sounds/Effects/Characters/Bloque 2",
-		"Sounds/Effects/Characters/Bloque 3",
-		"Sounds/Effects/Characters/Bloque 4",
-		"Sounds/Effects/Characters/Bloque 5"
-	};
+	/// <summary>
+	/// The cube that is selected in the whole world.
+	/// </summary>
+	private static Cube selectedCube;
 	
-    protected bool isSelected = false;
-    private static Cube selectedCube;
+	/// <summary>
+	/// The cube is selected.
+	/// </summary>
+    protected bool selected = false;
+	
+    /// <summary>
+    /// The current command that is executing, if its null then there.
+    /// </summary>
 	public Command command;
-
-	public Command Command {
-		get {
-			return this.command;
-		}
-		set {
-			command = value;
-		}
-	}
 	
-    public virtual bool IsSelected
-    {
-        get { return isSelected && CubeHelper.IsFree(transform.position + Vector3.up); }
-        set { isSelected = value; }
-    }
-
+	/// <summary>
+	/// Moves Cube to the direction .
+	/// </summary>
+	/// <param name='nextPosition'>
+	/// Next position.
+	/// </param>
     public virtual void MoveTo(Vector3 nextPosition) {
         Level.Singleton.Entities.Remove(Vector3Int.getVector(transform.position));
 		CubeAnimations.AnimateMove(gameObject, Vector3.down, nextPosition);
         Level.Singleton.Entities.Add(Vector3Int.getVector(nextPosition), this);
     }
-	
-	public void EndExecution(){
-		OrganizeTransform();
-		if(command != null){
-			command.EndExecution();
-		}
-		AudioSource ac = GetComponent<AudioSource>();
-		ac.clip = Resources.Load(sounds[Random.Range(0,sounds.Length -1)]) as AudioClip;
-		ac.Play();
-	}
-	
-	private Vector3 Vector3Round(Vector3 v){
-		return new Vector3(Mathf.Round(v.x),Mathf.Round(v.y),Mathf.Round(v.z));
-	}
-	
-	public void OrganizeTransform(){
-		Transform obj = gameObject.transform.parent;
-		transform.parent = null;
-		if (obj != null){
-			MonoBehaviour.Destroy(obj.gameObject);
-		}
-		transform.position = Vector3Round(transform.position);
-		transform.rotation = Quaternion.Euler(Vector3Round(transform.rotation.eulerAngles));
-	}
 	
     public virtual Command[] Options{ 
         get {
@@ -75,11 +45,31 @@ public class Cube : Entity, IClickable{
                     options.RemoveAt(i);
                 }
             }
-
             return options.ToArray();
         }
     }
-
+	
+	public void EndExecution(){
+		OrganizeTransform();
+		if(command != null){
+			command.EndExecution();
+		}
+	}
+	
+	private Vector3 Vector3Round(Vector3 v){
+		return new Vector3(Mathf.Round(v.x),Mathf.Round(v.y),Mathf.Round(v.z));
+	}
+	
+	public void OrganizeTransform(){
+		Transform obj = gameObject.transform.parent;
+		transform.parent = null;
+		if (obj != null){
+			MonoBehaviour.Destroy(obj.gameObject);
+		}
+		transform.position = Vector3Round(transform.position);
+		transform.rotation = Quaternion.Euler(Vector3Round(transform.rotation.eulerAngles));
+	}
+	
     public void FallOutOfBounds(Vector3 outOfBouncePosition)
     {
 		CubeAnimations.AnimateSlide(gameObject,outOfBouncePosition + new Vector3(0,-10,0), "KillCube", null);
@@ -88,7 +78,7 @@ public class Cube : Entity, IClickable{
 	public void KillCube(){
 		Destroy(gameObject);
 	}
-
+	
     public void NotifyClick()
     {
         if (selectedCube != this)
@@ -96,9 +86,28 @@ public class Cube : Entity, IClickable{
             if(selectedCube != null){
                 selectedCube.IsSelected = false;
             }
-            isSelected = true;
+            selected = true;
             selectedCube = this;
         }
     }
 	
+	public virtual void Update(){
+	}
+	
+	#region Get and Sets
+	public Command Command {
+		get {
+			return this.command;
+		}
+		set {
+			command = value;
+		}
+	}
+	
+	public virtual bool IsSelected
+    {
+        get { return selected && CubeHelper.IsFree(transform.position + Vector3.up); }
+        set { selected = value; }
+    }
+	#endregion
 }

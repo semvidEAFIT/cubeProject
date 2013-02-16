@@ -9,4 +9,7 @@ public class Entity : MonoBehaviour {
 		gameObject.AddComponent<AudioSource>();
 	}
 	
+	public virtual void Update(){
+		
+	}
 }
