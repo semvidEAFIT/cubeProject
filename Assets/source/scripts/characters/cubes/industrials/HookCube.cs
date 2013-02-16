@@ -7,7 +7,7 @@ public class HookCube : Cube {
     {
         get
         {
-            return isSelected;
+            return selected;
         }
         set
         {

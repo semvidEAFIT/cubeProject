@@ -12,7 +12,7 @@ public abstract class WallWalkingCube :  Cube{
     {
         get
         {
-            return isSelected;
+            return selected;
         }
         set
         {
